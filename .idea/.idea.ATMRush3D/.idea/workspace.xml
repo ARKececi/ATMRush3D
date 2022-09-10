@@ -10,6 +10,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c354bf3be62648649ea55e8af798831218200/20/6d39ed1c/Rigidbody.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c354bf3be62648649ea55e8af798831218200/e0/9c56643a/Collision.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c62cc0ef748e4107b21e2999fa50d73a13c800/ce/9532792f/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/edef46c9b2db4b878c98495bfdc516fa568ba8/c7/929527dc/Boolean.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -73,7 +74,14 @@
       <workItem from="1662493493961" duration="847000" />
       <workItem from="1662560961094" duration="3102000" />
       <workItem from="1662568006446" duration="19487000" />
-      <workItem from="1662625796608" duration="9673000" />
+      <workItem from="1662625796608" duration="9876000" />
+      <workItem from="1662669519377" duration="752000" />
+      <workItem from="1662710266099" duration="4806000" />
+      <workItem from="1662723607051" duration="1566000" />
+      <workItem from="1662738147111" duration="8827000" />
+      <workItem from="1662761674660" duration="166000" />
+      <workItem from="1662761972084" duration="707000" />
+      <workItem from="1662799709291" duration="2763000" />
     </task>
     <servers />
   </component>

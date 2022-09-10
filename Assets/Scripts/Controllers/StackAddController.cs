@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Data.UnityObject;
+using Data.ValueObject;
 using DG.Tweening;
 using Signals;
 using UnityEngine;
@@ -21,12 +23,16 @@ namespace Controllers
         #endregion
 
         #region Private Variables
+        
+        [Header("Data")] private StackData _stackData;
 
         private Vector3 _newPos;
 
         private Vector3 _stackPos;
 
         private float _moveDelay;
+
+        private float direct;
 
         #endregion
 
@@ -40,23 +46,27 @@ namespace Controllers
 
         private void Awake()
         {
-            _moveDelay = 0.60f;
+            _stackData = GetPlayerData();
+            
+        }
+        
+        private StackData GetPlayerData()
+        {
+            return Resources.Load<SO_StackData>("Data/SO_StackData").StackData;
         }
 
         private void Update()
         {
             MoveStackObject();
-                _objects[0].transform.localPosition = new Vector3(player.transform.localPosition.x,0.5f,0) ;
+                _objects[0].transform.localPosition = new Vector3(player.transform.localPosition.x,0.1f,0.8f) ;
         }
 
         public void ObjectController(GameObject other)
         {
             if (!_objects.Contains(other.gameObject))
             {
-                other.GetComponent<BoxCollider>().isTrigger = false;
-                other.gameObject.tag = "Collected";
-                other.AddComponent<ObjectPhysicsController>();
-                other.GetComponent<Rigidbody>().isKinematic = true;
+                other.GetComponentInChildren<BoxCollider>().isTrigger = false;
+                other.transform.GetChild(1).gameObject.tag = "Collected";
             }
         }
 
@@ -66,7 +76,7 @@ namespace Controllers
             {
                 other.transform.parent = collected.transform;
                 _newPos = _objects[index].transform.localPosition;
-                _newPos.z += 1;
+                _newPos.z += 0.5f;
                 other.transform.localPosition = _newPos;
                 _objects.Add(other);
                 stackAnimation.StackAnimationStart();
@@ -79,11 +89,12 @@ namespace Controllers
             {
                 _stackPos = _objects[i].transform.localPosition;
                 _stackPos.x = _objects[i - 1].transform.localPosition.x;
-                _objects[i].transform.DOLocalMove(_stackPos, _moveDelay);
+                 direct = Mathf.Lerp(_objects[i].transform.localPosition.x, _stackPos.x, _stackData.LerpDelay);
+                _objects[i].transform.localPosition = new Vector3(direct, _stackPos.y, _stackPos.z);
             }
         }
 
-        private void MoveOrigin()
+        /*private void MoveOrigin()
         {
             for (int i = 1; i < _objects.Count; i++)
             {
@@ -91,6 +102,6 @@ namespace Controllers
                 _stackPos.x = _objects[0].transform.localPosition.x;
                 _objects[i].transform.DOLocalMove(_stackPos,  _moveDelay);
             }
-        }
+        }*/
     }
 }

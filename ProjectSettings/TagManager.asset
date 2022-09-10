@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Collected
   - StackingObject
+  - Money
+  - RankCube
+  - Portal
+  - UpdateTrigger
   layers:
   - Default
   - TransparentFX
