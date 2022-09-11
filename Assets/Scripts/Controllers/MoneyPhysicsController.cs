@@ -6,12 +6,18 @@ using UnityEngine;
 
 namespace Controllers
 {
-    public class ObjectPhysicsController : MonoBehaviour
+    public class MoneyPhysicsController : MonoBehaviour
     {
         #region Self Variables
+        
         #region Serializefield Variables
+        
         [SerializeField] private CollectableManager manager;
+        
+        [SerializeField] private StackManager stackManager;
+
         #endregion
+        
         #endregion
         private void OnTriggerEnter(Collider other)
         {
@@ -27,6 +33,7 @@ namespace Controllers
             {
                 manager.MeshUpdater();
             }
+            
         }
     }
 }

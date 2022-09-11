@@ -36,10 +36,10 @@ namespace Controllers
             for (int i = _objects.Count-1; i > 0; i--)
             {
                 int index = i;
-                _scale = new Vector3(0.5f, 0.5f, 0.5f);
+                _scale = new Vector3(1, 1, 1);
                 _scale *= 1.5f;
                 _objects[index].transform.DOScale(_scale, 0.1f).OnComplete(() => 
-                    _objects[index].transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.1f));
+                    _objects[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f));
                 yield return new WaitForSeconds(0.05f);
 
 

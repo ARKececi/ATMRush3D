@@ -5,6 +5,7 @@ using Data.ValueObject;
 using DG.Tweening;
 using Signals;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Controllers
 {
@@ -16,8 +17,10 @@ namespace Controllers
 
         [SerializeField] private StackAddAnimation stackAnimation;
 
-        [SerializeField] private GameObject collected;
+        [SerializeField] private GameObject stack;
 
+        [SerializeField] private GameObject Collected;
+        
         [SerializeField] private GameObject player;
 
         #endregion
@@ -33,6 +36,12 @@ namespace Controllers
         private float _moveDelay;
 
         private float direct;
+
+        private int _index;
+
+        private float _randomStackPosX;
+
+        private float _randomStackPosZ;
 
         #endregion
 
@@ -65,7 +74,6 @@ namespace Controllers
         {
             if (!_objects.Contains(other.gameObject))
             {
-                other.GetComponentInChildren<BoxCollider>().isTrigger = false;
                 other.transform.GetChild(1).gameObject.tag = "Collected";
             }
         }
@@ -74,16 +82,16 @@ namespace Controllers
         {
             if (!_objects.Contains(other.gameObject))
             {
-                other.transform.parent = collected.transform;
+                other.transform.parent = stack.transform;
                 _newPos = _objects[index].transform.localPosition;
-                _newPos.z += 0.5f;
+                _newPos.z += 1;
                 other.transform.localPosition = _newPos;
                 _objects.Add(other);
                 stackAnimation.StackAnimationStart();
             }
         }
 
-        public void MoveStackObject()
+        private void MoveStackObject()
         {
             for (int i = 1; i < _objects.Count; i++)
             {
@@ -94,14 +102,29 @@ namespace Controllers
             }
         }
 
-        /*private void MoveOrigin()
+        public void StackDistributing(GameObject other)
         {
-            for (int i = 1; i < _objects.Count; i++)
+            _index = _objects.IndexOf(other);
+            Debug.Log(_index);
+            Debug.Log(_objects.Count);
+            _stackPos.z = _objects[_index].transform.localPosition.z;
+            for (int i = _index; i <= _objects.Count - 1; i++)
             {
-                _stackPos = _objects[i].transform.localPosition;
-                _stackPos.x = _objects[0].transform.localPosition.x;
-                _objects[i].transform.DOLocalMove(_stackPos,  _moveDelay);
+                _objects[i].transform.GetChild(1).gameObject.tag = "Money";
+                _randomStackPosX = Random.Range(4, -4);
+                _randomStackPosZ = Random.Range(10, 20);
+                _objects[i].transform.localPosition = new Vector3(_randomStackPosX, _stackPos.y, _stackPos.z + _randomStackPosZ);
+                _objects[i].transform.parent = Collected.transform;
+                Debug.Log(i);
             }
-        }*/
+
+            for (int i = _objects.Count - 1; i >= _index; i--)
+            {
+                _objects.Remove(_objects[i]);
+            }
+            
+        }
+        
+        
     }
 }

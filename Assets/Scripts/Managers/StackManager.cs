@@ -27,11 +27,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             StackSignals.Instance.onStackAdd += OnStackAdd;
+            StackSignals.Instance.onStackDistributing += OnStackDistributing;
         }
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onStackAdd -= OnStackAdd;
+            StackSignals.Instance.onStackDistributing -= OnStackDistributing;
         }
 
         private void OnDisable()
@@ -46,6 +48,11 @@ namespace Managers
             
             stackAddController.ObjectController(other.other);
             stackAddController.StackAddObject(other.other, stackAddController._objects.Count-1);
+        }
+
+        public void OnStackDistributing(StackObjectParams other)
+        {
+            stackAddController.StackDistributing(other.other);
         }
     }
 }

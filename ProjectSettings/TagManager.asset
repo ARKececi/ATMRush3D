@@ -10,6 +10,7 @@ TagManager:
   - RankCube
   - Portal
   - UpdateTrigger
+  - Obstacle
   layers:
   - Default
   - TransparentFX
