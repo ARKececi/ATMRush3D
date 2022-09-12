@@ -1,5 +1,6 @@
 ﻿using Data.UnityObject;
 using Data.ValueObject;
+using DG.Tweening;
 using Keys;
 using UnityEngine;
 
@@ -26,6 +27,10 @@ namespace Controllers
         private bool _isTouchingPlayer = true;
 
         private bool _station = true;
+
+        private float LerpDelay = 1;
+
+        private float direct;
 
         #endregion
 
@@ -55,16 +60,26 @@ namespace Controllers
                     Move();
 
                 else
+                {
                     StopMove();
+                }
+
             }
         }
+        
 
+        public void ObstacleMove()
+        {
+            _station = false;
+            transform.DOMoveZ(transform.position.z - 10, 1);
+            _station = true;
+
+        }
+            
         private void Move()
         {
-            
             move.velocity = new Vector3(_inputSpeed * _playerData.MovementSide, move.velocity.y, _playerData.MoveSpeed);
             move.position = new Vector3(Mathf.Clamp(move.position.x, _clamp.x, _clamp.y), move.position.y, move.position.z);
-            
         }
 
         private void StopMove()

@@ -2143,7 +2143,7 @@ GameObject:
   - component: {fileID: 1151448450}
   m_Layer: 0
   m_Name: PlayerPhysics
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2825,7 +2825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2554780821501637507, guid: 368bf229a6012f1468fb21e98d2d9517, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.213411
+      value: 2.08
       objectReference: {fileID: 0}
     - target: {fileID: 2554780821501637507, guid: 368bf229a6012f1468fb21e98d2d9517, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2833,7 +2833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2554780821501637507, guid: 368bf229a6012f1468fb21e98d2d9517, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 18.08
       objectReference: {fileID: 0}
     - target: {fileID: 2554780821501637507, guid: 368bf229a6012f1468fb21e98d2d9517, type: 3}
       propertyPath: m_LocalRotation.w

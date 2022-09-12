@@ -105,8 +105,6 @@ namespace Controllers
         public void StackDistributing(GameObject other)
         {
             _index = _objects.IndexOf(other);
-            Debug.Log(_index);
-            Debug.Log(_objects.Count);
             _stackPos.z = _objects[_index].transform.localPosition.z;
             for (int i = _index; i <= _objects.Count - 1; i++)
             {
@@ -115,12 +113,12 @@ namespace Controllers
                 _randomStackPosZ = Random.Range(10, 20);
                 _objects[i].transform.localPosition = new Vector3(_randomStackPosX, _stackPos.y, _stackPos.z + _randomStackPosZ);
                 _objects[i].transform.parent = Collected.transform;
-                Debug.Log(i);
             }
 
             for (int i = _objects.Count - 1; i >= _index; i--)
             {
                 _objects.Remove(_objects[i]);
+                _objects.TrimExcess();
             }
             
         }

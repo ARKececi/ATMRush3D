@@ -27,12 +27,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             InputSignals.Instance.onInputDragged += OnMovement;
+            CoreGameSignals.Instance.onObstacleMove += OnObstacleMove;
 
         }
 
         private void UnsubscribeEvents()
         {
             InputSignals.Instance.onInputDragged -= OnMovement;
+            CoreGameSignals.Instance.onObstacleMove -= OnObstacleMove;
 
         }
 
@@ -46,6 +48,11 @@ namespace Managers
         private void OnMovement(HorizontalInputParams horizontalInputParams)
         {
             playerMovementController.movementcontroller(horizontalInputParams);
+        }
+
+        private void OnObstacleMove()
+        {
+            playerMovementController.ObstacleMove();
         }
     }
 }

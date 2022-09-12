@@ -1,6 +1,7 @@
 ﻿using System;
 using Keys;
 using Managers;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -20,12 +21,13 @@ namespace Controllers
         {
             if (other.CompareTag("Collected"))
             {
-                Debug.Log("burdayım");
                 stackManager.OnStackDistributing(new StackObjectParams()
                 {
                     other = other.gameObject.transform.parent.gameObject
                 });
+                
             }
+            
         }
     }
 }

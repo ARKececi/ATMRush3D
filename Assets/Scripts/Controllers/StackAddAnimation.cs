@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -25,6 +26,11 @@ namespace Controllers
 
         #endregion
 
+        private void Awake()
+        {
+            _objects = _stackAdd._objects;
+        }
+
         public void StackAnimationStart()
         {
             StartCoroutine(StackAnimation());
@@ -32,17 +38,15 @@ namespace Controllers
         
         private IEnumerator StackAnimation()
         {
-            _objects = _stackAdd._objects;
-            for (int i = _objects.Count-1; i > 0; i--)
+            for (int i = 0; i <= _objects.Count - 1; i++)
             {
-                int index = i;
+                int index = (_objects.Count - 1) - i;
                 _scale = new Vector3(1, 1, 1);
                 _scale *= 1.5f;
-                _objects[index].transform.DOScale(_scale, 0.1f).OnComplete(() => 
-                    _objects[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f));
+                
+                _objects[index].transform.DOScale(_scale, 0.1f);
+                _objects[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f).SetDelay(0.1f);
                 yield return new WaitForSeconds(0.05f);
-
-
             }
         }
     }

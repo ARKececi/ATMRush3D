@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using Extentions;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace Signals
 {
-    public class CoreGameSignals : MonoBehaviour
+    public class CoreGameSignals : MonoSingleton<CoreGameSignals>
     {
-        
+        public UnityAction onObstacleMove = delegate { };
     }
 }

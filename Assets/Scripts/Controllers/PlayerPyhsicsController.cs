@@ -16,6 +16,11 @@ namespace Controllers
                     other = other.gameObject.transform.parent.gameObject
                 });
             }
+
+            if (other.CompareTag("Obstacle"))
+            {
+                CoreGameSignals.Instance.onObstacleMove?.Invoke();
+            }
         }
     }
 }
