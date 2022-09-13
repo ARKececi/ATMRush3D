@@ -11,6 +11,7 @@ TagManager:
   - Portal
   - UpdateTrigger
   - Obstacle
+  - ATM
   layers:
   - Default
   - TransparentFX

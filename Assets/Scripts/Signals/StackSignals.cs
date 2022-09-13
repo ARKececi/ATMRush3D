@@ -9,5 +9,6 @@ namespace Signals
     {
         public UnityAction<StackObjectParams>onStackAdd = delegate { };
         public UnityAction<StackObjectParams> onStackDistributing = delegate { };
+        public UnityAction<int> onRemoveList = delegate { };
     }
 }

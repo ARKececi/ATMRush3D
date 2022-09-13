@@ -16,6 +16,8 @@ namespace Controllers
         
         [SerializeField] private StackManager stackManager;
 
+        
+
         #endregion
         
         #endregion
@@ -33,7 +35,18 @@ namespace Controllers
             {
                 manager.MeshUpdater();
             }
-            
+
+            if (other.CompareTag("ATM"))
+            {
+                if (transform.CompareTag("Collected"))
+                {
+                    CoreGameSignals.Instance.onMoneyCount?.Invoke(new StackObjectParams()
+                    {
+                        other = transform.parent.gameObject
+                    });
+                }
+
+            }
         }
-    }
+    }   
 }

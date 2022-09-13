@@ -21,7 +21,7 @@ namespace Controllers
         {
             if (other.CompareTag("Collected"))
             {
-                stackManager.OnStackDistributing(new StackObjectParams()
+                StackSignals.Instance.onStackDistributing(new StackObjectParams()
                 {
                     other = other.gameObject.transform.parent.gameObject
                 });

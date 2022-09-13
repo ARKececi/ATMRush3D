@@ -23,6 +23,8 @@ namespace Controllers
         
         [SerializeField] private GameObject player;
 
+        [SerializeField] private StackObstacleAnimation stackObstacleAnimation;
+
         #endregion
 
         #region Private Variables
@@ -43,9 +45,13 @@ namespace Controllers
 
         private float _randomStackPosZ;
 
+        private Vector3 _distribut;
+
         #endregion
 
         #region Public Variables
+        
+        public Vector3 _distributingPos;
 
         public List<GameObject> _objects;
 
@@ -75,6 +81,7 @@ namespace Controllers
             if (!_objects.Contains(other.gameObject))
             {
                 other.transform.GetChild(1).gameObject.tag = "Collected";
+                other.GetComponentInChildren<BoxCollider>().isTrigger = true;
             }
         }
 
@@ -105,21 +112,28 @@ namespace Controllers
         public void StackDistributing(GameObject other)
         {
             _index = _objects.IndexOf(other);
-            _stackPos.z = _objects[_index].transform.localPosition.z;
+            _distribut.z = _objects[_index].transform.parent.gameObject.transform.position.z + _index;
             for (int i = _index; i <= _objects.Count - 1; i++)
             {
                 _objects[i].transform.GetChild(1).gameObject.tag = "Money";
                 _randomStackPosX = Random.Range(4, -4);
                 _randomStackPosZ = Random.Range(10, 20);
-                _objects[i].transform.localPosition = new Vector3(_randomStackPosX, _stackPos.y, _stackPos.z + _randomStackPosZ);
+                _distributingPos = new Vector3(_randomStackPosX, 0.5f, _distribut.z + _randomStackPosZ);
+                stackObstacleAnimation.StackDistributingAnimation(i, _objects, _distributingPos);
+                //_objects[i].transform.localPosition = _distributingPos;
                 _objects[i].transform.parent = Collected.transform;
             }
-
             for (int i = _objects.Count - 1; i >= _index; i--)
             {
+                RemoveList(i);
+            }
+        }
+
+        public void RemoveList(int i)
+        {
+
                 _objects.Remove(_objects[i]);
                 _objects.TrimExcess();
-            }
             
         }
         

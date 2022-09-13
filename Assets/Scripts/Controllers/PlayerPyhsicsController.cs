@@ -21,6 +21,11 @@ namespace Controllers
             {
                 CoreGameSignals.Instance.onObstacleMove?.Invoke();
             }
+
+            if (other.CompareTag("ATM"))
+            {
+                CoreGameSignals.Instance.onObstacleMove?.Invoke();
+            }
         }
     }
 }

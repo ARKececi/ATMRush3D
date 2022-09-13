@@ -28,12 +28,14 @@ namespace Managers
         {
             StackSignals.Instance.onStackAdd += OnStackAdd;
             StackSignals.Instance.onStackDistributing += OnStackDistributing;
+            StackSignals.Instance.onRemoveList += OnRemoveList;
         }
 
         private void UnsubscribeEvents()
         {
             StackSignals.Instance.onStackAdd -= OnStackAdd;
             StackSignals.Instance.onStackDistributing -= OnStackDistributing;
+            StackSignals.Instance.onRemoveList -= OnRemoveList;
         }
 
         private void OnDisable()
@@ -53,6 +55,11 @@ namespace Managers
         public void OnStackDistributing(StackObjectParams other)
         {
             stackAddController.StackDistributing(other.other);
+        }
+        
+        private void OnRemoveList(int i)
+        {
+            stackAddController.RemoveList(i);
         }
     }
 }
