@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SO_PlayerData
   m_EditorClassIdentifier: 
   PlayerData:
-    _movementSide: 10
-    MoveSpeed: 5
+    MovementSide: 10
+    MoveSpeed: 15

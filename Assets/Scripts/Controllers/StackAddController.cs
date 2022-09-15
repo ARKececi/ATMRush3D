@@ -123,6 +123,7 @@ namespace Controllers
                 //_objects[i].transform.localPosition = _distributingPos;
                 _objects[i].transform.parent = Collected.transform;
             }
+            
             for (int i = _objects.Count - 1; i >= _index; i--)
             {
                 RemoveList(i);

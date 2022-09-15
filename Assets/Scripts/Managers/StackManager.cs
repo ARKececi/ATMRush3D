@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using System.Collections.Generic;
+using Controllers;
 using Keys;
 using Signals;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Managers
             StackSignals.Instance.onStackAdd += OnStackAdd;
             StackSignals.Instance.onStackDistributing += OnStackDistributing;
             StackSignals.Instance.onRemoveList += OnRemoveList;
+            StackSignals.Instance.onList += OnList;
         }
 
         private void UnsubscribeEvents()
@@ -36,6 +38,7 @@ namespace Managers
             StackSignals.Instance.onStackAdd -= OnStackAdd;
             StackSignals.Instance.onStackDistributing -= OnStackDistributing;
             StackSignals.Instance.onRemoveList -= OnRemoveList;
+            StackSignals.Instance.onList -= OnList;
         }
 
         private void OnDisable()
@@ -60,6 +63,11 @@ namespace Managers
         private void OnRemoveList(int i)
         {
             stackAddController.RemoveList(i);
+        }
+
+        private List<GameObject> OnList()
+        {
+            return stackAddController._objects;
         }
     }
 }

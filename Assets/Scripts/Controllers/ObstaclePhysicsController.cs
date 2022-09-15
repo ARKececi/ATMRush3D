@@ -12,8 +12,6 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private StackManager stackManager;
-
         #endregion
 
         #endregion

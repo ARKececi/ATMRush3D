@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2708650835339847394}
   - component: {fileID: 5509926364251953691}
   - component: {fileID: 1090599373140235394}
-  - component: {fileID: 4479323685206575682}
+  - component: {fileID: 6413682470691665379}
   m_Layer: 0
   m_Name: FixedObstacle
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,6 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -81,6 +82,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &1090599373140235394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -94,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.4, y: 1.5999999, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4479323685206575682
+--- !u!114 &6413682470691665379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,6 +105,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8783934393292140332}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce8fb62a12ea5034aa6c548fa2373887, type: 3}
+  m_Script: {fileID: 11500000, guid: 227854bae11747779b1fec28e9385b32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
