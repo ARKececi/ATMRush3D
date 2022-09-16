@@ -18,7 +18,6 @@ namespace Controllers
 
             if (other.CompareTag("Collected"))
             {
-                Debug.Log("burdayım");
                 atmController.MoneyVariable(other.transform.parent.gameObject);
             }
             

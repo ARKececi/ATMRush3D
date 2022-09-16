@@ -31,6 +31,7 @@ namespace Managers
             StackSignals.Instance.onStackDistributing += OnStackDistributing;
             StackSignals.Instance.onRemoveList += OnRemoveList;
             StackSignals.Instance.onList += OnList;
+            StackSignals.Instance.onStackDestroy += OnStackDestroy;
         }
 
         private void UnsubscribeEvents()
@@ -39,6 +40,7 @@ namespace Managers
             StackSignals.Instance.onStackDistributing -= OnStackDistributing;
             StackSignals.Instance.onRemoveList -= OnRemoveList;
             StackSignals.Instance.onList -= OnList;
+            StackSignals.Instance.onStackDestroy -= OnStackDestroy;
         }
 
         private void OnDisable()
@@ -68,6 +70,11 @@ namespace Managers
         private List<GameObject> OnList()
         {
             return stackAddController._objects;
+        }
+
+        private void OnStackDestroy(StackObjectParams gameObject)
+        {
+            stackAddController.StackDestroy(gameObject.other);
         }
     }
 }

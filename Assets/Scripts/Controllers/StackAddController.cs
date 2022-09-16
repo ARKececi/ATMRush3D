@@ -47,6 +47,8 @@ namespace Controllers
 
         private Vector3 _distribut;
 
+        private int _beforeIndex;
+
         #endregion
 
         #region Public Variables
@@ -89,10 +91,16 @@ namespace Controllers
         {
             if (!_objects.Contains(other.gameObject))
             {
+                if (!(_beforeIndex + 1 >= index))
+                {
+                    index = _beforeIndex + 1;
+                }
                 other.transform.parent = stack.transform;
-                _newPos = _objects[index].transform.localPosition;
-                _newPos.z += 1;
+                _newPos = _objects[0].transform.localPosition;
+                _newPos.z += index + 0.5f;
+                _newPos.x = _objects[index].transform.localPosition.x;
                 other.transform.localPosition = _newPos;
+                _beforeIndex = index;
                 _objects.Add(other);
                 stackAnimation.StackAnimationStart();
             }
@@ -100,7 +108,8 @@ namespace Controllers
 
         private void MoveStackObject()
         {
-            for (int i = 1; i < _objects.Count; i++)
+            int value = _objects.Count;
+            for (int i = 1; i < value; i++)
             {
                 _stackPos = _objects[i].transform.localPosition;
                 _stackPos.x = _objects[i - 1].transform.localPosition.x;
@@ -111,23 +120,28 @@ namespace Controllers
 
         public void StackDistributing(GameObject other)
         {
+            int value = _objects.Count;
             _index = _objects.IndexOf(other);
-            _distribut.z = _objects[_index].transform.parent.gameObject.transform.position.z + _index;
-            for (int i = _index; i <= _objects.Count - 1; i++)
+            _distribut.z = _objects[_index].transform.position.z ;
+            for (int i = value - 1; i >= _index; i--)
             {
+  
                 _objects[i].transform.GetChild(1).gameObject.tag = "Money";
                 _randomStackPosX = Random.Range(4, -4);
-                _randomStackPosZ = Random.Range(10, 20);
+                _randomStackPosZ = Random.Range(5, 10);
                 _distributingPos = new Vector3(_randomStackPosX, 0.5f, _distribut.z + _randomStackPosZ);
                 stackObstacleAnimation.StackDistributingAnimation(i, _objects, _distributingPos);
-                //_objects[i].transform.localPosition = _distributingPos;
+                //_objects[i].transform.localPosition = _distributingPos;  
                 _objects[i].transform.parent = Collected.transform;
+                RemoveList(i);
+                
             }
             
-            for (int i = _objects.Count - 1; i >= _index; i--)
-            {
-                RemoveList(i);
-            }
+        }
+
+        public void StackDestroy(GameObject other)
+        {
+
         }
 
         public void RemoveList(int i)
@@ -135,7 +149,7 @@ namespace Controllers
 
                 _objects.Remove(_objects[i]);
                 _objects.TrimExcess();
-            
+
         }
         
         

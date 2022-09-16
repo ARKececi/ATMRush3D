@@ -29,7 +29,7 @@ namespace Controllers
         {
             objects[index].GetComponentInChildren<BoxCollider>().isTrigger = false;
             //objects[index].transform.DOLocalMove(distributPos, 0.1f);
-            objects[index].transform.DOLocalJump(distributPos, 2f,3,0.5f);
+            objects[index].transform.DOLocalJump(distributPos, 2f, 1, 0.5f);
         }
 
     }

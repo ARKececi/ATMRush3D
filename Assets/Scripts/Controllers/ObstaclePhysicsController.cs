@@ -20,11 +20,22 @@ namespace Controllers
             if (other.CompareTag("Collected"))
             {
                 StackSignals.Instance.onStackDistributing(new StackObjectParams()
-                {
+                { 
                     other = other.gameObject.transform.parent.gameObject
                 });
-                
+
             }
+            
+            if (other.CompareTag("Front"))
+            {
+                StackSignals.Instance.onStackDestroy( new StackObjectParams()
+                { 
+                    other = other.gameObject.transform.parent.gameObject
+                });
+            }
+
+            
+            
             
         }
     }

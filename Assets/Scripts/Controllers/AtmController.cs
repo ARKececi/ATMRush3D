@@ -56,10 +56,8 @@ namespace Controllers
                     SetScore();
                     break;
             }
-         other.transform.parent = collected.transform;
+         other.transform.parent = atmAnimation.transform;
          atmAnimation.AtmReceiveAnimation(other);
-         Debug.Log(Score);
-         
         }
 
         private void SetScore()
