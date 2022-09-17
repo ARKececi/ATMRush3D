@@ -16,6 +16,12 @@ namespace Managers
 
         #endregion
 
+        #region Private Variables
+
+        private int _index;
+
+        #endregion
+
         #endregion
         
         #region Event Subscription
@@ -52,9 +58,9 @@ namespace Managers
 
         private void OnStackAdd(StackObjectParams other)
         {
-            
+            _index = stackAddController._objects.Count - 1;
             stackAddController.ObjectController(other.other);
-            stackAddController.StackAddObject(other.other, stackAddController._objects.Count-1);
+            stackAddController.StackAddObject(other.other, _index);
         }
 
         public void OnStackDistributing(StackObjectParams other)

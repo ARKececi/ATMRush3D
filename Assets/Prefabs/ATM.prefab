@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409575303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7995900052361048610}
@@ -43,7 +43,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 3.5, z: 2}
+  m_Size: {x: 0.2, y: 0.5, z: 2}
   m_Center: {x: 1, y: 0, z: 0}
 --- !u!114 &409575306
 MonoBehaviour:
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 895799797}
   m_Layer: 0
   m_Name: AtmPhysics
-  m_TagString: ATM
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895799793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7995900052361048610}
@@ -114,7 +114,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.5, z: 2}
+  m_Size: {x: 1.5, y: 0.5, z: 1}
   m_Center: {x: 0, y: -1.5, z: 0}
 --- !u!54 &895799797
 Rigidbody:
@@ -158,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091680308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7995900052361048610}
@@ -175,7 +175,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2, y: 3.5, z: 2}
+  m_Size: {x: 0.2, y: 0.5, z: 2}
   m_Center: {x: -0.75, y: 0, z: 0}
 --- !u!114 &1091680311
 MonoBehaviour:
@@ -286,11 +286,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042788120188186732}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
+  m_IsTrigger: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.5, y: 0.5, z: 2}
-  m_Center: {x: 0, y: -1.5, z: 0}
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: -0.6, z: 0}
 --- !u!114 &97074833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atmAnimation: {fileID: 97074835}
-  collected: {fileID: 0}
   _atmScore: {fileID: 5902814583963512925}
 --- !u!114 &97074834
 MonoBehaviour:
@@ -331,7 +330,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cbfdff4e8e54f39bdb93024c79d863d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atmGameObject: {fileID: 1042788120188186732}
 --- !u!1 &5207157227806892044
 GameObject:
   m_ObjectHideFlags: 0

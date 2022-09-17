@@ -12,6 +12,7 @@ TagManager:
   - UpdateTrigger
   - Obstacle
   - ATM
+  - Front
   layers:
   - Default
   - TransparentFX

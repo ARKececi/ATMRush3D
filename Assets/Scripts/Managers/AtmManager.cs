@@ -27,11 +27,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onMoneyCount += OnMoneyCount;
+            
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onMoneyCount -= OnMoneyCount;
+            
         }
 
         private void OnDisable()
@@ -45,5 +47,6 @@ namespace Managers
         {
             atmController.MoneyVariable(other.other);
         }
+        
     }
 }

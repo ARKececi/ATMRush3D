@@ -17,7 +17,7 @@ namespace Controllers
 
         private void Update()
         {
-            transform.localPosition = new Vector3(0 , player.transform.position.y, player.transform.position.z);
+            transform.position = new Vector3(0 , player.transform.position.y, player.transform.position.z);
         }
     }
     

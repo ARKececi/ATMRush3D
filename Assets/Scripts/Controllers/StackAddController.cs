@@ -17,13 +17,13 @@ namespace Controllers
 
         [SerializeField] private StackAddAnimation stackAnimation;
 
-        [SerializeField] private GameObject stack;
-
         [SerializeField] private GameObject Collected;
         
         [SerializeField] private GameObject player;
 
         [SerializeField] private StackObstacleAnimation stackObstacleAnimation;
+
+        [SerializeField] private GameObject levelHolder;
 
         #endregion
 
@@ -64,9 +64,14 @@ namespace Controllers
         private void Awake()
         {
             _stackData = GetPlayerData();
-            
         }
-        
+
+        private void Start()
+        {
+            player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
+            Collected = levelHolder.transform.GetChild(0).transform.GetChild(1).gameObject;
+        }
+
         private StackData GetPlayerData()
         {
             return Resources.Load<SO_StackData>("Data/SO_StackData").StackData;
@@ -95,7 +100,7 @@ namespace Controllers
                 {
                     index = _beforeIndex + 1;
                 }
-                other.transform.parent = stack.transform;
+                other.transform.parent = transform;
                 _newPos = _objects[0].transform.localPosition;
                 _newPos.z += index + 0.5f;
                 _newPos.x = _objects[index].transform.localPosition.x;
@@ -122,19 +127,27 @@ namespace Controllers
         {
             int value = _objects.Count;
             _index = _objects.IndexOf(other);
-            _distribut.z = _objects[_index].transform.position.z ;
-            for (int i = value - 1; i >= _index; i--)
+            if (!(_index == -1))
             {
-  
-                _objects[i].transform.GetChild(1).gameObject.tag = "Money";
-                _randomStackPosX = Random.Range(4, -4);
-                _randomStackPosZ = Random.Range(5, 10);
-                _distributingPos = new Vector3(_randomStackPosX, 0.5f, _distribut.z + _randomStackPosZ);
-                stackObstacleAnimation.StackDistributingAnimation(i, _objects, _distributingPos);
-                //_objects[i].transform.localPosition = _distributingPos;  
-                _objects[i].transform.parent = Collected.transform;
-                RemoveList(i);
                 
+                _distribut.z = _objects[_index].transform.position.z;
+                for (int i = value - 1 ; i >= _index; i--)
+                {
+                
+                    _objects[i].GetComponentInChildren<MoneyPhysicsController>().gameObject.tag = "Money";
+                    _randomStackPosX = Random.Range(4, -4);
+                    _randomStackPosZ = Random.Range(5, 10);
+                    _distributingPos = new Vector3(_randomStackPosX, 0.5f, _distribut.z + _randomStackPosZ);
+                    stackObstacleAnimation.StackDistributingAnimation(i, _objects, _distributingPos);
+                    //_objects[i].transform.localPosition = _distributingPos;  
+                    _objects[i].transform.parent = Collected.transform;
+                    RemoveList(i);
+                    if (i == _index)
+                    {
+                        other.SetActive(false);
+                    }
+                
+                }
             }
             
         }

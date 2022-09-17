@@ -20,6 +20,11 @@ namespace Controllers
             {
                 atmController.MoneyVariable(other.transform.parent.gameObject);
             }
+
+            if (other.CompareTag("Player"))
+            {
+                atmController.AtmMove();
+            }
             
         }
     }

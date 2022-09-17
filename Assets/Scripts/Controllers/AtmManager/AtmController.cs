@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Keys;
 using Signals;
 using TMPro;
@@ -13,8 +14,6 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private AtmAnimation atmAnimation;
-
-        [SerializeField] private GameObject collected;
 
         [SerializeField] private TextMeshPro _atmScore;
 
@@ -63,6 +62,11 @@ namespace Controllers
         private void SetScore()
         {
             _atmScore.text = Score.ToString();
+        }
+
+        public void AtmMove()
+        {
+            transform.DOMoveY(-4, 1.5f).SetDelay(0.5f);
         }
         
     }

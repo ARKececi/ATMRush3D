@@ -10,5 +10,7 @@ namespace Signals
         public UnityAction onObstacleMove = delegate { };
         
         public UnityAction<StackObjectParams> onMoneyCount = delegate { };
+        
+        public UnityAction onAtmMove = delegate { };
     }
 }

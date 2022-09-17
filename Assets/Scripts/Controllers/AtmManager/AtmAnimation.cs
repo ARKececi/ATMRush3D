@@ -9,8 +9,6 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private GameObject atmGameObject;
-
         #endregion
 
         #region Private Variables
