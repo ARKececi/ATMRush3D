@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8d79f0b33924039a675173a2f06be77, type: 3}
   m_Name: SO_LevelData
   m_EditorClassIdentifier: 
-  Levels: 
+  Levels: 00000000

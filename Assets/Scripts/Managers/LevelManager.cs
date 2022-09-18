@@ -1,4 +1,6 @@
-﻿using Data.UnityObject;
+﻿using System;
+using Controllers.LevelManager;
+using Data.UnityObject;
 using UnityEngine;
 
 namespace Managers
@@ -6,6 +8,14 @@ namespace Managers
     public class LevelManager : MonoBehaviour
     {
         #region Self Variables
+
+        #region Serialized Variables
+
+        [SerializeField] private GameObject levelHolder;
+
+        [SerializeField] private LevelLoaderController levelLoader;
+
+        #endregion
 
         #region Private Variables
 
@@ -19,25 +29,26 @@ namespace Managers
         
         private void Awake()
         {
-            _levelCount = GetActiveLevel();
-            Debug.Log(_levelCount);
+            _levelID = GetActiveLevel();
+            Debug.Log(_levelID);
         }
         
         private int GetActiveLevel()
         {
-            if (!ES3.FileExists()) return 0;
-            return ES3.KeyExists("Level") ? ES3.Load<int>("Level") : 0;
+            return _levelID % Resources.Load<SO_LevelData>("Data/SO_LevelData").Levels.Count;
+
         }
-        
+
         private void Start()
         {
-            WinLevelID();
+            OnLoaderLevel();
         }
-        
-        private void WinLevelID()
+
+        private void OnLoaderLevel()
         {
-            _levelID = _levelCount % Resources.Load<SO_LevelData>("Data/SO_Level")
-                .Levels.Count;
+            
+            levelLoader.LoaderLevel(_levelID, levelHolder.transform);
+            
         }
     }
 }

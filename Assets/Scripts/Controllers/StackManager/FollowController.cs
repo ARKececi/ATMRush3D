@@ -9,11 +9,22 @@ namespace Controllers
 
         #region Serialized Variables
 
-        [SerializeField] private GameObject player;
+        [SerializeField] private GameObject levelHolder;
+        
+        #endregion
+
+        #region Private Variables
+
+        private GameObject player;
 
         #endregion
 
         #endregion
+
+        private void Start()
+        {
+            player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
+        }
 
         private void Update()
         {
