@@ -13,6 +13,8 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private Rigidbody move;
+        
+        [SerializeField] private Animator animator;
 
         #endregion
 
@@ -39,6 +41,7 @@ namespace Controllers
         private void Start()
         {
             _playerData = GetPlayerData();
+            Reset();
         }
 
         private PlayerData GetPlayerData()
@@ -70,10 +73,7 @@ namespace Controllers
 
         public void ObstacleMove()
         {
-            _station = false;
             transform.DOMoveZ(transform.position.z - 10, 1);
-            _station = true;
-
         }
             
         private void Move()
@@ -85,6 +85,19 @@ namespace Controllers
         private void StopMove()
         {
             move.velocity = Vector3.zero;
+        }
+
+        public void Play()
+        {
+            _isTouchingPlayer = true;
+            _station = true;
+            animator.SetTrigger("Run");
+        }
+
+        public void Reset()
+        {
+            _isTouchingPlayer = false;
+            _station = false;
         }
     }
 }

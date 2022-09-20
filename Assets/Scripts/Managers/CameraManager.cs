@@ -40,13 +40,13 @@ namespace Managers
 
         private void SubscribeEvents()
         {
-            CameraSignals.Instance.onEnterFinisStation += OnEnterFinisStation;
+            CameraSignals.Instance.onPlayEnter += OnPlayEnter;
             CameraSignals.Instance.onSetCamera += OnSetCamera;
         }
 
         private void UnsubscribeEvents()
         {
-            CameraSignals.Instance.onEnterFinisStation -= OnEnterFinisStation;
+            CameraSignals.Instance.onPlayEnter -= OnPlayEnter;
             CameraSignals.Instance.onSetCamera -= OnSetCamera;
         }
 
@@ -57,8 +57,9 @@ namespace Managers
         
         #endregion
         
-        private void OnEnterFinisStation()
+        private void OnPlayEnter()
         {
+            Debug.Log(_cameraState);
             switch (_cameraState)
             {
                 case CameraState.Runner:

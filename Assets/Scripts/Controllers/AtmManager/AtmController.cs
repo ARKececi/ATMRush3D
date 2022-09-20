@@ -66,7 +66,7 @@ namespace Controllers
 
         public void AtmMove()
         {
-            transform.DOMoveY(-4, 1.5f).SetDelay(0.5f);
+            transform.DOMoveY(-4, 0.5f);
         }
         
     }

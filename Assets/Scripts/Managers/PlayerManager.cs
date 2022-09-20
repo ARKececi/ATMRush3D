@@ -28,6 +28,8 @@ namespace Managers
         {
             InputSignals.Instance.onInputDragged += OnMovement;
             CoreGameSignals.Instance.onObstacleMove += OnObstacleMove;
+            CoreGameSignals.Instance.onReset += OnReset;
+            CoreGameSignals.Instance.onPlay += OnPlay;
 
         }
 
@@ -35,6 +37,8 @@ namespace Managers
         {
             InputSignals.Instance.onInputDragged -= OnMovement;
             CoreGameSignals.Instance.onObstacleMove -= OnObstacleMove;
+            CoreGameSignals.Instance.onReset -= OnReset;
+            CoreGameSignals.Instance.onPlay -= OnPlay;
 
         }
 
@@ -54,5 +58,16 @@ namespace Managers
         {
             playerMovementController.ObstacleMove();
         }
+
+        private void OnReset()
+        {
+            playerMovementController.Reset();
+        }
+
+        private void OnPlay()
+        {
+            playerMovementController.Play();
+        }
+        
     }
 }

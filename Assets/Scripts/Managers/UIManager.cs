@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using Controllers.UIManager;
+using Enums;
+using Signals;
+using UnityEngine;
 
 namespace Managers
 {
@@ -8,12 +11,22 @@ namespace Managers
 
         #region Serialized Variables
 
-        
+        [SerializeField] private UIPanelController panelController;
 
         #endregion
 
         #endregion
-        
-        
+
+        private void OnPlay()
+        {
+            panelController.OnClosePanel(UIPanel.PlayButton);
+            CoreGameSignals.Instance.onPlay?.Invoke();
+            CameraSignals.Instance.onPlayEnter?.Invoke();
+        }
+
+        public void Play()
+        {
+            OnPlay();
+        }
     }
 }

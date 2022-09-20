@@ -6,7 +6,7 @@ namespace Signals
 {
     public class CameraSignals : MonoSingleton<CameraSignals>
     {
-        public UnityAction onEnterFinisStation = delegate { };
+        public UnityAction onPlayEnter = delegate { };
         public UnityAction onSetCamera = delegate { };
     }
 }
