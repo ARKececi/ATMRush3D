@@ -25,11 +25,11 @@ namespace Controllers
 
         #endregion
 
-        public void StackDistributingAnimation(int index, List<GameObject> objects, Vector3 distributPos)
+        public void StackDistributingAnimation(GameObject objects, Vector3 distributPos)
         {
-            objects[index].GetComponentInChildren<BoxCollider>().isTrigger = false;
-            //objects[index].transform.DOLocalMove(distributPos, 0.1f);
-            objects[index].transform.DOLocalJump(distributPos, 2f, 1, 0.5f);
+            objects.GetComponentInChildren<BoxCollider>().isTrigger = false;
+            objects.transform.DOLocalJump(distributPos, 2f, 1, 0.2f)
+                .OnComplete(()=> {objects.GetComponentInChildren<MoneyPhysicsController>().gameObject.tag = "Money";});
         }
 
     }

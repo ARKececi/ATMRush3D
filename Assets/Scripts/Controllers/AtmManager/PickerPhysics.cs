@@ -2,7 +2,7 @@
 
 namespace Controllers
 {
-    public class AtmPhysics : MonoBehaviour
+    public class PickerPhysics : MonoBehaviour
     {
         #region Self Variables
 
@@ -16,9 +16,9 @@ namespace Controllers
         private void OnTriggerEnter(Collider other)
         {
 
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Collected"))
             {
-                atmController.AtmMove();
+                atmController.MoneyVariable(other.transform.parent.gameObject);
             }
             
         }

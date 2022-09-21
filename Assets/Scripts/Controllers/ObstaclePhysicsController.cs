@@ -26,17 +26,6 @@ namespace Controllers
 
             }
             
-            if (other.CompareTag("Front"))
-            {
-                StackSignals.Instance.onStackDestroy( new StackObjectParams()
-                { 
-                    other = other.gameObject.transform.parent.gameObject
-                });
-            }
-
-            
-            
-            
         }
     }
 }

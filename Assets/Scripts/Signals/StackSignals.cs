@@ -13,6 +13,6 @@ namespace Signals
         public UnityAction<StackObjectParams> onStackDistributing = delegate { };
         public UnityAction<int> onRemoveList = delegate { };
         public Func<List<GameObject>> onList = delegate { return new List<GameObject>(0); };
-        public UnityAction<StackObjectParams> onStackDestroy = delegate { };
+        public UnityAction<GameObject> onFinish =delegate { };
     }
 }

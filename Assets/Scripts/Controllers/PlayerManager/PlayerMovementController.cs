@@ -30,7 +30,7 @@ namespace Controllers
 
         private bool _station = true;
 
-        private float LerpDelay = 1;
+        private float _lerpDelay = 1;
 
         private float direct;
 
@@ -70,7 +70,6 @@ namespace Controllers
             }
         }
         
-
         public void ObstacleMove()
         {
             transform.DOMoveZ(transform.position.z - 10, 1);
@@ -92,6 +91,12 @@ namespace Controllers
             _isTouchingPlayer = true;
             _station = true;
             animator.SetTrigger("Run");
+        }
+
+        public void Finish()
+        {
+            animator.SetTrigger("Idle");
+            _station = false;
         }
 
         public void Reset()

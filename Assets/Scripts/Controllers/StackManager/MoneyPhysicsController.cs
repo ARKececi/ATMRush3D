@@ -16,8 +16,6 @@ namespace Controllers
         
         [SerializeField] private StackManager stackManager;
 
-        
-
         #endregion
         
         #endregion
@@ -35,7 +33,11 @@ namespace Controllers
             {
                 manager.MeshUpdater();
             }
-            
+
+            if (other.CompareTag("Finish"))
+            {
+                StackSignals.Instance.onFinish?.Invoke(transform.parent.gameObject);
+            }
         }
     }   
 }

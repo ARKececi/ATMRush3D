@@ -8,6 +8,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/246830504dfb492f9b30772914fd7e4026800/60/c04ad355/Animator.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c354bf3be62648649ea55e8af798831218200/20/6d39ed1c/Rigidbody.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c354bf3be62648649ea55e8af798831218200/e0/9c56643a/Collision.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c62cc0ef748e4107b21e2999fa50d73a13c800/bc/2cb7376b/Quaternion.cs" root0="SKIP_HIGHLIGHTING" />
@@ -98,7 +99,10 @@
       <workItem from="1663516140328" duration="4093000" />
       <workItem from="1663582896951" duration="5929000" />
       <workItem from="1663603376108" duration="2409000" />
-      <workItem from="1663656535921" duration="8404000" />
+      <workItem from="1663656535921" duration="8659000" />
+      <workItem from="1663748691562" duration="1860000" />
+      <workItem from="1663758234000" duration="9412000" />
+      <workItem from="1663783452108" duration="7838000" />
     </task>
     <servers />
   </component>

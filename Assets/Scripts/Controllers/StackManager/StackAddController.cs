@@ -49,6 +49,8 @@ namespace Controllers
 
         private int _beforeIndex;
 
+        private GameObject _zeroPositon;
+
         #endregion
 
         #region Public Variables
@@ -70,6 +72,7 @@ namespace Controllers
         {
             player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
             Collected = levelHolder.transform.GetChild(0).transform.GetChild(1).gameObject;
+            _zeroPositon = _objects[0];
         }
 
         private StackData GetPlayerData()
@@ -80,7 +83,7 @@ namespace Controllers
         private void Update()
         {
             MoveStackObject();
-                _objects[0].transform.localPosition = new Vector3(player.transform.localPosition.x,0.1f,0.8f) ;
+            _zeroPositon.transform.localPosition = new Vector3(player.transform.localPosition.x,0.1f,0.8f) ;
         }
 
         public void ObjectController(GameObject other)
@@ -127,42 +130,46 @@ namespace Controllers
         {
             int value = _objects.Count;
             _index = _objects.IndexOf(other);
-            if (!(_index == -1))
+
+            if (_index != -1)
             {
-                
                 _distribut.z = _objects[_index].transform.position.z;
                 for (int i = value - 1 ; i >= _index; i--)
                 {
-                
-                    _objects[i].GetComponentInChildren<MoneyPhysicsController>().gameObject.tag = "Money";
-                    _randomStackPosX = Random.Range(4, -4);
-                    _randomStackPosZ = Random.Range(5, 10);
+                    RandomVector();
                     _distributingPos = new Vector3(_randomStackPosX, 0.5f, _distribut.z + _randomStackPosZ);
-                    stackObstacleAnimation.StackDistributingAnimation(i, _objects, _distributingPos);
-                    //_objects[i].transform.localPosition = _distributingPos;  
+                    var obje = _objects[i];
+                    stackObstacleAnimation.StackDistributingAnimation(obje, _distributingPos);
                     _objects[i].transform.parent = Collected.transform;
                     RemoveList(i);
                     if (i == _index)
                     {
                         other.SetActive(false);
                     }
-                
+                    
                 }
             }
-            
         }
 
-        public void StackDestroy(GameObject other)
+        public void RandomVector()
         {
-
+            _randomStackPosX = Random.Range(4, -4);
+            _randomStackPosZ = Random.Range(5, 15);
         }
 
         public void RemoveList(int i)
         {
-
+            if (i != -1)
+            {
                 _objects.Remove(_objects[i]);
                 _objects.TrimExcess();
+            }
+        }
 
+        public void Finish(int i)
+        {
+            _objects[i].transform.parent = Collected.transform;
+            _objects[i].transform.DOMoveX(-7, 2);
         }
         
         

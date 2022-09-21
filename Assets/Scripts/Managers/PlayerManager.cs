@@ -68,6 +68,11 @@ namespace Managers
         {
             playerMovementController.Play();
         }
+
+        public void OnFinish()
+        {
+            playerMovementController.Finish();
+        }
         
     }
 }

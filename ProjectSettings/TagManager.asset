@@ -13,6 +13,7 @@ TagManager:
   - Obstacle
   - ATM
   - Front
+  - FinishPlayer
   layers:
   - Default
   - TransparentFX

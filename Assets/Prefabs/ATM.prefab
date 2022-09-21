@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409575303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: -0.2}
   m_LocalScale: {x: 0.75, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7995900052361048610}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 895799795}
   - component: {fileID: 895799797}
   m_Layer: 0
-  m_Name: AtmPhysics
+  m_Name: PickerPhysics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,7 +158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091680308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: -0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7995900052361048610}
@@ -200,7 +200,6 @@ GameObject:
   - component: {fileID: 7995900052361048610}
   - component: {fileID: 6207437960401136138}
   - component: {fileID: 7882698637042370148}
-  - component: {fileID: 1042788120188186733}
   - component: {fileID: 97074833}
   - component: {fileID: 97074834}
   - component: {fileID: 97074835}
@@ -225,6 +224,7 @@ Transform:
   - {fileID: 409575304}
   - {fileID: 1091680309}
   - {fileID: 895799794}
+  - {fileID: 2884914860981200422}
   - {fileID: 7240959376025099763}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -278,19 +278,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1042788120188186733
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1042788120188186732}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2, y: 2, z: 2}
-  m_Center: {x: 0, y: -0.6, z: 1.8}
 --- !u!114 &97074833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +317,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cbfdff4e8e54f39bdb93024c79d863d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2473855606763254481
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2884914860981200422}
+  - component: {fileID: 3730034918250416426}
+  - component: {fileID: 4193792601976480061}
+  m_Layer: 0
+  m_Name: AtmPhysics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2884914860981200422
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473855606763254481}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7995900052361048610}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3730034918250416426
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473855606763254481}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: -0.6, z: 0.5}
+--- !u!114 &4193792601976480061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2473855606763254481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47225725a43d49b5a57d88c6c6869121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atmController: {fileID: 97074833}
 --- !u!1 &5207157227806892044
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +405,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 0.91169995, z: 0.98829985}
   m_Children: []
   m_Father: {fileID: 7995900052361048610}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -16,5 +16,7 @@ namespace Signals
         public UnityAction onPlay = delegate { };
         
         public UnityAction onReset = delegate { };
+        
+        public UnityAction onFinish = delegate { };
     }
 }
