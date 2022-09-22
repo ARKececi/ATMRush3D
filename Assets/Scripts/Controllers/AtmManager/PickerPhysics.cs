@@ -18,7 +18,7 @@ namespace Controllers
 
             if (other.CompareTag("Collected"))
             {
-                atmController.MoneyVariable(other.transform.parent.gameObject);
+                atmController.MoneyVariableCount(other.transform.parent.gameObject);
             }
             
         }

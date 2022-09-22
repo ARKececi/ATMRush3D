@@ -166,10 +166,41 @@ namespace Controllers
             }
         }
 
-        public void Finish(int i)
+        public void ObjectRemoveList(GameObject other)
         {
-            _objects[i].transform.parent = Collected.transform;
-            _objects[i].transform.DOMoveX(-7, 2);
+            var ObjeId = _objects.IndexOf(other);
+            RemoveList(ObjeId);
+            
+        }
+
+        public void Finish(GameObject other)
+        {
+            if (_objects.IndexOf(other) != -1)
+            {
+                var index = _objects.IndexOf(other);
+                int value = _objects.Count;
+                if (_objects[index] == null)
+                {
+                    _objects[index - 1].transform.parent = Collected.transform;
+                    _objects[index - 1].transform.DOMoveX(-7, .5f);
+                    if (index != -1)
+                    {
+                        RemoveList(index - 1);
+                    }
+                }
+                else
+                {
+                    var finisPosition = other.transform.position;
+                    for (int i = value -1; i >= index; i--)
+                    {
+                        _objects[i].transform.position = new Vector3(finisPosition.x, finisPosition.y, finisPosition.z);
+                        _objects[i].transform.parent = Collected.transform;
+                        _objects[i].transform.DOMoveX(-7, .5f);
+                        RemoveList(i);
+                    }
+                }
+            }
+                
         }
         
         

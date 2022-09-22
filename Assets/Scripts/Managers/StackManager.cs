@@ -38,6 +38,7 @@ namespace Managers
             StackSignals.Instance.onRemoveList += OnRemoveList;
             StackSignals.Instance.onList += OnList;
             StackSignals.Instance.onFinish += OnFinish;
+            StackSignals.Instance.onObjectRemoveList += OnObjectRemoveList;
 
         }
 
@@ -48,6 +49,7 @@ namespace Managers
             StackSignals.Instance.onRemoveList -= OnRemoveList;
             StackSignals.Instance.onList -= OnList;
             StackSignals.Instance.onFinish -= OnFinish;
+            StackSignals.Instance.onObjectRemoveList -= OnObjectRemoveList;
             
         }
 
@@ -75,6 +77,11 @@ namespace Managers
             stackAddController.RemoveList(i);
         }
 
+        private void OnObjectRemoveList(GameObject obje)
+        {
+            stackAddController.ObjectRemoveList(obje);
+        }
+
         private List<GameObject> OnList()
         {
             return stackAddController._objects;
@@ -82,8 +89,7 @@ namespace Managers
 
         private void OnFinish(GameObject other)
         {
-            var index = stackAddController._objects.IndexOf(other);
-            stackAddController.Finish(index);
+            stackAddController.Finish(other);
         }
     }
 }

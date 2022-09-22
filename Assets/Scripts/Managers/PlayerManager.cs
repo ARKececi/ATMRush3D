@@ -13,6 +13,8 @@ namespace Managers
 
         [SerializeField] private PlayerMovementController playerMovementController;
 
+        [SerializeField] private PlayerController playerController;
+
         #endregion
 
         #endregion
@@ -30,6 +32,7 @@ namespace Managers
             CoreGameSignals.Instance.onObstacleMove += OnObstacleMove;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
+            //CoreGameSignals.Instance.onSetPlayerScore += OnSetScore;
 
         }
 
@@ -39,7 +42,7 @@ namespace Managers
             CoreGameSignals.Instance.onObstacleMove -= OnObstacleMove;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-
+            //CoreGameSignals.Instance.onSetPlayerScore -= OnSetScore;
         }
 
         private void OnDisable()
@@ -57,6 +60,11 @@ namespace Managers
         private void OnObstacleMove()
         {
             playerMovementController.ObstacleMove();
+        }
+
+        private void OnSetScore(int score)
+        {
+            playerController.SetScore(score);
         }
 
         private void OnReset()

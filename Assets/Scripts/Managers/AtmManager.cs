@@ -27,13 +27,14 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onMoneyCount += OnMoneyCount;
-            
+            CoreGameSignals.Instance.onSetScore += OnSetScore;
+
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onMoneyCount -= OnMoneyCount;
-            
+            CoreGameSignals.Instance.onSetScore -= OnSetScore;
         }
 
         private void OnDisable()
@@ -45,7 +46,12 @@ namespace Managers
 
         private void OnMoneyCount(StackObjectParams other)
         {
-            atmController.MoneyVariable(other.other);
+            atmController.MoneyVariableCount(other.other);
+        }
+
+        private void OnSetScore(int Score)
+        {
+            atmController.SetScore(Score);
         }
         
     }
