@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using DG.Tweening;
-using Keys;
+﻿using DG.Tweening;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -15,8 +13,6 @@ namespace Controllers
 
         [SerializeField] private AtmAnimation atmAnimation;
 
-        [SerializeField] private TextMeshPro atmScore;
-
         #endregion
 
         #region Private Variables
@@ -27,15 +23,16 @@ namespace Controllers
         
         public void MoneyVariableCount(GameObject other)
         {
-             ScoreSignals.Instance.onScoreCalculation(other);
              StackSignals.Instance.onObjectRemoveList?.Invoke(other);
              other.transform.parent = atmAnimation.transform;
              atmAnimation.AtmReceiveAnimation(other);
+             ScoreSignals.Instance.onAtmScoreCalculation(other);
+             
         }
 
-        public void SetScore(int Score)
+        public void SetScore(int score)
         {
-            //atmScore.text = Score.ToString();
+            
         }
 
         public void AtmMove()

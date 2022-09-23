@@ -110,7 +110,9 @@ namespace Controllers
                 other.transform.localPosition = _newPos;
                 _beforeIndex = index;
                 _objects.Add(other);
+                ScoreSignals.Instance.onPlayerScoreCalculation?.Invoke(other);
                 stackAnimation.StackAnimationStart();
+
             }
         }
 
@@ -141,6 +143,7 @@ namespace Controllers
                     var obje = _objects[i];
                     stackObstacleAnimation.StackDistributingAnimation(obje, _distributingPos);
                     _objects[i].transform.parent = Collected.transform;
+                    ScoreSignals.Instance.onPlayerScoreDistributing?.Invoke(_objects[i]);
                     RemoveList(i);
                     if (i == _index)
                     {
@@ -170,7 +173,6 @@ namespace Controllers
         {
             var ObjeId = _objects.IndexOf(other);
             RemoveList(ObjeId);
-            
         }
 
         public void Finish(GameObject other)

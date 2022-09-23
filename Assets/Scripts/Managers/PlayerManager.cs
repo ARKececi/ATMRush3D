@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Keys;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -13,7 +14,7 @@ namespace Managers
 
         [SerializeField] private PlayerMovementController playerMovementController;
 
-        [SerializeField] private PlayerController playerController;
+        [SerializeField] private TextMeshPro score;
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace Managers
             CoreGameSignals.Instance.onObstacleMove += OnObstacleMove;
             CoreGameSignals.Instance.onReset += OnReset;
             CoreGameSignals.Instance.onPlay += OnPlay;
-            //CoreGameSignals.Instance.onSetPlayerScore += OnSetScore;
+            CoreGameSignals.Instance.onSetPlayerScore += OnSetScore;
 
         }
 
@@ -42,7 +43,7 @@ namespace Managers
             CoreGameSignals.Instance.onObstacleMove -= OnObstacleMove;
             CoreGameSignals.Instance.onReset -= OnReset;
             CoreGameSignals.Instance.onPlay -= OnPlay;
-            //CoreGameSignals.Instance.onSetPlayerScore -= OnSetScore;
+            CoreGameSignals.Instance.onSetPlayerScore -= OnSetScore;
         }
 
         private void OnDisable()
@@ -62,9 +63,9 @@ namespace Managers
             playerMovementController.ObstacleMove();
         }
 
-        private void OnSetScore(int score)
+        public void OnSetScore(int i)
         {
-            playerController.SetScore(score);
+            score.text = i.ToString();
         }
 
         private void OnReset()

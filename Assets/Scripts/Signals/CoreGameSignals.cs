@@ -19,6 +19,8 @@ namespace Signals
         
         public UnityAction onFinish = delegate { };
         
-        public UnityAction<int> onSetScore = delegate { };
+        public UnityAction<int> onSetPlayerScore = delegate { };
+        
+        public UnityAction<int> onSetScore = delegate {  };
     }
 }

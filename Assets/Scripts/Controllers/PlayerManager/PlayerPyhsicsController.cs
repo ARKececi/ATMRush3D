@@ -3,6 +3,7 @@ using Keys;
 using Managers;
 using Signals;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Controllers
 {
@@ -13,6 +14,12 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private PlayerManager playerManager;
+
+        #endregion
+
+        #region Private Variables
+
+        private int _score;
 
         #endregion
 

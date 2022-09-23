@@ -59,7 +59,9 @@ namespace Managers
 
         private void SendCollectableMeshDataToMeshController()
         {
+            ScoreSignals.Instance.onPlayerScoreDistributing?.Invoke(transform.gameObject);
             collactableMeshController.SetMeshData(MeshTypeValue);
+            ScoreSignals.Instance.onPlayerScoreCalculation?.Invoke(transform.gameObject);
         }
         
         public void MeshUpdater()

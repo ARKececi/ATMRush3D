@@ -1,5 +1,6 @@
 ﻿using Data.ValueObject;
 using Enums;
+using Signals;
 using UnityEngine;
 
 namespace Controllers
@@ -25,6 +26,7 @@ namespace Controllers
         {
             collectableMeshFilter.mesh = _collectableMeshData.meshdatas[(int)type];
         }
+        
     }
     
 }

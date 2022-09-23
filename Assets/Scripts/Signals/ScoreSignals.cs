@@ -6,6 +6,8 @@ namespace Signals
 {
     public class ScoreSignals : MonoSingleton<ScoreSignals>
     {
-        public UnityAction<GameObject> onScoreCalculation = delegate { };
+        public UnityAction<GameObject> onPlayerScoreCalculation = delegate { };
+        public UnityAction<GameObject> onPlayerScoreDistributing = delegate { };
+        public UnityAction<GameObject> onAtmScoreCalculation = delegate { };
     }
 }

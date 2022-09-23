@@ -1,6 +1,7 @@
 ﻿using Controllers;
 using Keys;
 using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -12,6 +13,8 @@ namespace Managers
         #region Serialized Variables
 
         [SerializeField] private AtmController atmController;
+        
+        [SerializeField] private TextMeshPro atmText;
 
         #endregion
 
@@ -49,10 +52,10 @@ namespace Managers
             atmController.MoneyVariableCount(other.other);
         }
 
-        private void OnSetScore(int Score)
+        private void OnSetScore(int score)
         {
-            atmController.SetScore(Score);
+            atmText.text = score.ToString();
         }
-        
+
     }
 }
