@@ -24,6 +24,7 @@ namespace Managers
         #endregion
         
         #endregion
+        
         #region Event Subscription
 
         private void OnEnable()
@@ -36,6 +37,7 @@ namespace Managers
             ScoreSignals.Instance.onPlayerScoreCalculation += OnPlayerScoreCalculation;
             ScoreSignals.Instance.onPlayerScoreDistributing += OnPlayerScoreDistributing;
             ScoreSignals.Instance.onAtmScoreCalculation += OnAtmScoreCalculation;
+            ScoreSignals.Instance.onSetScore += OnSetScore;
         }
 
         private void UnsubscribeEvents()
@@ -43,6 +45,7 @@ namespace Managers
             ScoreSignals.Instance.onPlayerScoreCalculation -= OnPlayerScoreCalculation;
             ScoreSignals.Instance.onPlayerScoreDistributing -= OnPlayerScoreDistributing;
             ScoreSignals.Instance.onAtmScoreCalculation -= OnAtmScoreCalculation;
+            ScoreSignals.Instance.onSetScore -= OnSetScore;
         }
 
         private void OnDisable()
@@ -57,13 +60,13 @@ namespace Managers
                 switch (MoneyName.mesh.name)
                 {
                     case "Money Instance" :
-                        _score = 10;
+                        _score = 1;
                         break;
                     case "gold Instance":
-                        _score = 20;
+                        _score = 2;
                         break;
                     case "diamond Instance":
-                        _score = 40;
+                        _score = 4;
                         break;
                 }
         }
@@ -87,6 +90,11 @@ namespace Managers
             ScoreCalculation(other);
             _atmScore += _score;
             CoreGameSignals.Instance.onSetScore?.Invoke(_atmScore);
+        }
+
+        private void OnSetScore()
+        {
+            CoreGameSignals.Instance.onGetScore?.Invoke(_playerScore);
         }
         
     }

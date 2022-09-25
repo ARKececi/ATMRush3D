@@ -8,5 +8,6 @@ namespace Signals
     {
         public UnityAction onPlayEnter = delegate { };
         public UnityAction onSetCamera = delegate { };
+        public UnityAction onFakeState = delegate { };
     }
 }

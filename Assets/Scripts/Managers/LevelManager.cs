@@ -46,9 +46,7 @@ namespace Managers
 
         private void OnLoaderLevel()
         {
-            
             levelLoader.LoaderLevel(_levelID, levelHolder.transform);
-            
         }
     }
 }

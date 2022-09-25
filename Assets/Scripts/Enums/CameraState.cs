@@ -3,6 +3,7 @@
     public enum CameraState
     {
         Init,
-        Runner
+        Runner,
+        Fake
     }
 }

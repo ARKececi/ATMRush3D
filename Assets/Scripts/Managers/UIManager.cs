@@ -16,6 +16,29 @@ namespace Managers
         #endregion
 
         #endregion
+        
+        #region Event Subscription
+
+        private void OnEnable()
+        {
+            SubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            UISignals.Instance.onNext += OnNext;
+        }
+
+        private void UnsubscribeEvents()
+        {
+            UISignals.Instance.onNext -= OnNext;
+        }
+
+        private void OnDisable()
+        {
+            UnsubscribeEvents();
+        }
+        #endregion
 
         private void OnPlay()
         {
@@ -24,9 +47,19 @@ namespace Managers
             CameraSignals.Instance.onPlayEnter?.Invoke();
         }
 
+        public void Next()
+        {
+            panelController.OnClosePanel(UIPanel.NextButton);
+        }
+
         public void Play()
         {
             OnPlay();
+        }
+
+        private void OnNext()
+        {
+            panelController.OnOpenPanel(UIPanel.NextButton);
         }
     }
 }

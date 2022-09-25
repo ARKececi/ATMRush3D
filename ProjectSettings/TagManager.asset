@@ -12,8 +12,9 @@ TagManager:
   - UpdateTrigger
   - Obstacle
   - ATM
-  - Front
   - FinishPlayer
+  - Wall
+  - FakePlayer
   layers:
   - Default
   - TransparentFX

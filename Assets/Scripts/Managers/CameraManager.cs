@@ -21,6 +21,8 @@ namespace Managers
         
         [SerializeField] private GameObject player;
 
+        [SerializeField] private GameObject fakePlayer;
+
         #endregion
 
         #region Private Variables
@@ -42,12 +44,14 @@ namespace Managers
         {
             CameraSignals.Instance.onPlayEnter += OnPlayEnter;
             CameraSignals.Instance.onSetCamera += OnSetCamera;
+            CameraSignals.Instance.onFakeState += OnFakeState;
         }
 
         private void UnsubscribeEvents()
         {
             CameraSignals.Instance.onPlayEnter -= OnPlayEnter;
             CameraSignals.Instance.onSetCamera -= OnSetCamera;
+            CameraSignals.Instance.onFakeState -= OnFakeState;
         }
 
         private void OnDisable()
@@ -72,8 +76,15 @@ namespace Managers
                     _cameraState = CameraState.Runner; 
                     animator.SetTrigger(_cameraState.ToString());
                     break;
+                
             }
             
+        }
+
+        private void OnFakeState()
+        {
+            animator.SetTrigger("Fake");
+            vmStateCamera.Follow = fakePlayer.transform;
         }
 
         private void Start()

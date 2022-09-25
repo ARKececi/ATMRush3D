@@ -1,4 +1,5 @@
-﻿using Controllers;
+﻿using System.Collections;
+using Controllers;
 using Keys;
 using Signals;
 using TMPro;
@@ -81,6 +82,14 @@ namespace Managers
         public void OnFinish()
         {
             playerMovementController.Finish();
+            StartCoroutine(WaitingFinal());
+        }
+
+        IEnumerator WaitingFinal()
+        {
+            yield return new WaitForSeconds(2f);
+            gameObject.SetActive(false);
+            CoreGameSignals.Instance.onFakePlayer?.Invoke();
         }
         
     }

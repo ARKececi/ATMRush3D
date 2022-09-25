@@ -2,6 +2,8 @@
 {
     public enum UIPanel
     {
-        PlayButton
+        PlayButton,
+        NextButton
+
     }
 }
