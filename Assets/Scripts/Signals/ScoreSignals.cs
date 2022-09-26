@@ -10,5 +10,6 @@ namespace Signals
         public UnityAction<GameObject> onPlayerScoreDistributing = delegate { };
         public UnityAction<GameObject> onAtmScoreCalculation = delegate { };
         public UnityAction onSetScore = delegate { };
+        public UnityAction onScoreReset = delegate { };
     }
 }

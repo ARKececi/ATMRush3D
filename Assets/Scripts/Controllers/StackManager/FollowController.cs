@@ -10,12 +10,12 @@ namespace Controllers
         #region Serialized Variables
 
         [SerializeField] private GameObject levelHolder;
+
+        [SerializeField] private GameObject player;
         
         #endregion
 
         #region Private Variables
-
-        private GameObject player;
 
         #endregion
 
@@ -23,12 +23,21 @@ namespace Controllers
 
         private void Start()
         {
+            Follow();
+        }
+
+        public void Follow()
+        {
             player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
         }
 
         private void Update()
         {
-            transform.position = new Vector3(0 , player.transform.position.y, player.transform.position.z);
+            if (player != null)
+            {
+                transform.position = new Vector3(0 , player.transform.position.y, player.transform.position.z);
+            }
+            
         }
     }
     

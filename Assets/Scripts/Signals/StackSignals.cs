@@ -15,5 +15,7 @@ namespace Signals
         public Func<List<GameObject>> onList = delegate { return new List<GameObject>(0); };
         public UnityAction<GameObject> onFinish =delegate { };
         public UnityAction<GameObject> onObjectRemoveList = delegate { };
+        public UnityAction<GameObject> onListController = delegate { };
+        public UnityAction onRestFollow = delegate { };
     }
 }

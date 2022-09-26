@@ -75,6 +75,13 @@ namespace Controllers
             _zeroPositon = _objects[0];
         }
 
+        public void Reset()
+        {
+            player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
+            Collected = levelHolder.transform.GetChild(0).transform.GetChild(1).gameObject;
+            _zeroPositon = _objects[0];
+        }
+
         private StackData GetPlayerData()
         {
             return Resources.Load<SO_StackData>("Data/SO_StackData").StackData;
@@ -83,7 +90,10 @@ namespace Controllers
         private void Update()
         {
             MoveStackObject();
-            _zeroPositon.transform.localPosition = new Vector3(player.transform.localPosition.x,0.1f,0.8f) ;
+            if (player != null)
+            {
+                _zeroPositon.transform.localPosition = new Vector3(player.transform.localPosition.x,0.1f,0.8f) ;
+            }
         }
 
         public void ObjectController(GameObject other)
@@ -112,7 +122,6 @@ namespace Controllers
                 _objects.Add(other);
                 ScoreSignals.Instance.onPlayerScoreCalculation?.Invoke(other);
                 stackAnimation.StackAnimationStart();
-
             }
         }
 
@@ -202,7 +211,25 @@ namespace Controllers
                     }
                 }
             }
-                
+        }
+
+        public GameObject ListController(GameObject other)
+        {
+            var cantains = _objects.IndexOf(other);
+            var listCount = _objects.Count;
+            if (_objects[cantains] != null)
+            {
+                for (int i = listCount -1; i >= cantains; i--)
+                {
+                    return _objects[i];
+                }
+            }
+            else
+            {
+                return other;
+            }
+
+            return null;
         }
         
         

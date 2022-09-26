@@ -14,6 +14,8 @@ namespace Managers
 
         [SerializeField] private StackAddController stackAddController;
 
+        [SerializeField] private FollowController followController;
+
         #endregion
 
         #region Private Variables
@@ -39,6 +41,8 @@ namespace Managers
             StackSignals.Instance.onList += OnList;
             StackSignals.Instance.onFinish += OnFinish;
             StackSignals.Instance.onObjectRemoveList += OnObjectRemoveList;
+            StackSignals.Instance.onListController += OnListController;
+            StackSignals.Instance.onRestFollow += OnRest;
 
         }
 
@@ -50,6 +54,8 @@ namespace Managers
             StackSignals.Instance.onList -= OnList;
             StackSignals.Instance.onFinish -= OnFinish;
             StackSignals.Instance.onObjectRemoveList -= OnObjectRemoveList;
+            StackSignals.Instance.onListController -= OnListController;
+            StackSignals.Instance.onRestFollow -= OnRest;
             
         }
 
@@ -90,6 +96,17 @@ namespace Managers
         private void OnFinish(GameObject other)
         {
             stackAddController.Finish(other);
+        }
+
+        private void OnListController(GameObject other)
+        {
+            stackAddController.ListController(other);
+        }
+
+        private void OnRest()
+        {
+            followController.Follow();
+            stackAddController.Reset();
         }
     }
 }

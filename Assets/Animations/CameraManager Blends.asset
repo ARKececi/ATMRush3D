@@ -38,8 +38,8 @@ MonoBehaviour:
   - m_From: Fake
     m_To: Initialized
     m_Blend:
-      m_Style: 0
-      m_Time: 2
+      m_Style: 4
+      m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
         m_Curve: []

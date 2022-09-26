@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Signals;
+using UnityEngine;
 
 namespace Controllers
 {
@@ -18,6 +19,7 @@ namespace Controllers
 
             if (other.CompareTag("Collected"))
             {
+                //StackSignals.Instance.onListController?.Invoke(other.transform.parent.gameObject);
                 atmController.MoneyVariableCount(other.transform.parent.gameObject);
             }
             

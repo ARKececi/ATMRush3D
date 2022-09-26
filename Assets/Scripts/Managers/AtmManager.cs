@@ -31,6 +31,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onMoneyCount += OnMoneyCount;
             CoreGameSignals.Instance.onSetScore += OnSetScore;
+            CoreGameSignals.Instance.onMoneyVariableCount += OnMoneyVariableCount;
 
         }
 
@@ -38,6 +39,7 @@ namespace Managers
         {
             CoreGameSignals.Instance.onMoneyCount -= OnMoneyCount;
             CoreGameSignals.Instance.onSetScore -= OnSetScore;
+            CoreGameSignals.Instance.onMoneyVariableCount += OnMoneyVariableCount;
         }
 
         private void OnDisable()
@@ -55,6 +57,11 @@ namespace Managers
         private void OnSetScore(int score)
         {
             atmText.text = score.ToString();
+        }
+
+        private void OnMoneyVariableCount(GameObject other)
+        {
+            atmController.MoneyVariableCount(other);
         }
 
     }

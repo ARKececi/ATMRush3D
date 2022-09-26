@@ -19,6 +19,8 @@ namespace Managers
 
         [SerializeField] private GameObject fakeMoney;
 
+        [SerializeField] private Material WallMetarial;
+
         #endregion
 
         private float _scoreX;
@@ -30,6 +32,8 @@ namespace Managers
         private int _score;
         
         private float _changesColor;
+
+        private Vector3 _fakePos;
 
         #endregion
         
@@ -44,12 +48,14 @@ namespace Managers
         {
             CoreGameSignals.Instance.onFakePlayer += OnFakePlayer;
             CoreGameSignals.Instance.onGetScore += OnGetScore;
+            CoreGameSignals.Instance.onMiniGameReset += OnMiniGameReset;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onFakePlayer -= OnFakePlayer;
             CoreGameSignals.Instance.onGetScore -= OnGetScore;
+            CoreGameSignals.Instance.onMiniGameReset -= OnMiniGameReset;
         }
 
         private void OnDisable()
@@ -60,10 +66,16 @@ namespace Managers
 
         private void Awake()
         {
+            _fakePos = transform.GetChild(0).localPosition;
             _scoreX = 1.0f;
-            WallInstantiate();
         }
-        
+
+        private void Start()
+        {
+            DOVirtual.DelayedCall(.2f, WallInstantiate);
+            DOVirtual.DelayedCall(.2f, FakeMoney);
+        }
+
         private void OnGetScore(int score)
         {
             _score = score;
@@ -88,8 +100,8 @@ namespace Managers
         private void OnFakePlayer()
         {
             fakePlayer.SetActive(true);
-            FakeMoney();
             CameraSignals.Instance.onFakeState?.Invoke();
+            StartCoroutine(MovingPlayer());
         }
 
         private void FakeMoney()
@@ -99,8 +111,7 @@ namespace Managers
                 _fakeMoney = Instantiate(fakeMoney, transform.GetChild(0));
                 _fakeMoney.transform.localPosition = new Vector3(0, -1 * i, -10);
             }
-
-            StartCoroutine(MovingPlayer());
+            
         }
         
         IEnumerator MovingPlayer()
@@ -115,7 +126,17 @@ namespace Managers
         {
             _changesColor = (0.036f + _changesColor) % 1;
             other.GetComponent<Renderer>().material.DOColor(Color.HSVToRGB(_changesColor, 1, 1), 0.1f);
-            other.transform.DOLocalMoveZ(-2, .5f).SetDelay(.5f);
+            other.transform.DOLocalMoveZ(-2, .2f).SetDelay(.1f);
+        }
+
+        private void OnMiniGameReset()
+        {
+            for (int i = 0; i < 18; i++)
+            {
+                transform.GetChild(1).GetChild(i).GetComponent<Renderer>().material = WallMetarial;
+            }
+            fakePlayer.SetActive(false);
+            fakePlayer.transform.localPosition = _fakePos;
         }
         
         

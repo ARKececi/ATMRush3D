@@ -38,6 +38,7 @@ namespace Managers
             ScoreSignals.Instance.onPlayerScoreDistributing += OnPlayerScoreDistributing;
             ScoreSignals.Instance.onAtmScoreCalculation += OnAtmScoreCalculation;
             ScoreSignals.Instance.onSetScore += OnSetScore;
+            ScoreSignals.Instance.onScoreReset += OnScoreReset;
         }
 
         private void UnsubscribeEvents()
@@ -46,6 +47,7 @@ namespace Managers
             ScoreSignals.Instance.onPlayerScoreDistributing -= OnPlayerScoreDistributing;
             ScoreSignals.Instance.onAtmScoreCalculation -= OnAtmScoreCalculation;
             ScoreSignals.Instance.onSetScore -= OnSetScore;
+            ScoreSignals.Instance.onScoreReset -= OnScoreReset;
         }
 
         private void OnDisable()
@@ -95,6 +97,12 @@ namespace Managers
         private void OnSetScore()
         {
             CoreGameSignals.Instance.onGetScore?.Invoke(_playerScore);
+        }
+
+        private void OnScoreReset()
+        {
+            _playerScore = 0;
+            _atmScore = 0;
         }
         
     }

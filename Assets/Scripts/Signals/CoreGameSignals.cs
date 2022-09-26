@@ -26,5 +26,11 @@ namespace Signals
         public UnityAction onFakePlayer = delegate { };
         
         public UnityAction<int> onGetScore = delegate { };
+        
+        public UnityAction<GameObject> onMoneyVariableCount = delegate { };
+        
+        public UnityAction onWinStation = delegate { };
+        
+        public UnityAction onMiniGameReset = delegate { };
     }
 }

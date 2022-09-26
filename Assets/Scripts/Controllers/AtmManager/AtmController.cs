@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Signals;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,10 @@ namespace Controllers
 
         #region Private Variables
 
+        private List<GameObject> _objectList;
+        
+        private GameObject _object;
+
         #endregion
 
         #endregion
@@ -27,7 +32,6 @@ namespace Controllers
              other.transform.parent = atmAnimation.transform;
              atmAnimation.AtmReceiveAnimation(other);
              ScoreSignals.Instance.onAtmScoreCalculation(other);
-             
         }
 
         public void SetScore(int score)

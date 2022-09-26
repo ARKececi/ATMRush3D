@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Cinemachine;
 using Signals;
 using Sirenix.OdinInspector;
@@ -20,14 +21,14 @@ namespace Managers
         [SerializeField] private GameObject levelHolder;
         
         [SerializeField] private GameObject player;
-
-        [SerializeField] private GameObject fakePlayer;
-
+        
         #endregion
 
         #region Private Variables
 
         private CameraState _cameraState;
+
+        private Vector3 _resetPosition;
 
         #endregion
 
@@ -45,6 +46,7 @@ namespace Managers
             CameraSignals.Instance.onPlayEnter += OnPlayEnter;
             CameraSignals.Instance.onSetCamera += OnSetCamera;
             CameraSignals.Instance.onFakeState += OnFakeState;
+            CameraSignals.Instance.onReset += OnReset;
         }
 
         private void UnsubscribeEvents()
@@ -52,6 +54,7 @@ namespace Managers
             CameraSignals.Instance.onPlayEnter -= OnPlayEnter;
             CameraSignals.Instance.onSetCamera -= OnSetCamera;
             CameraSignals.Instance.onFakeState -= OnFakeState;
+            CameraSignals.Instance.onReset += OnReset;
         }
 
         private void OnDisable()
@@ -83,19 +86,35 @@ namespace Managers
 
         private void OnFakeState()
         {
+            
+            StartCoroutine(FakeState());
+            
+        }
+
+        IEnumerator FakeState()
+        {
             animator.SetTrigger("Fake");
-            vmStateCamera.Follow = fakePlayer.transform;
+            yield return new WaitForSeconds(1);
+
         }
 
         private void Start()
         {
-            player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
             OnSetCamera();
+            _resetPosition = transform.position;
         }
 
         private void OnSetCamera()
         {
+            player = levelHolder.transform.GetChild(0).transform.GetChild(0).gameObject;
             vmStateCamera.Follow = player.transform;
+        }
+
+        private void OnReset()
+        {
+            OnSetCamera();
+            OnPlayEnter();
+            transform.position = _resetPosition;
         }
     }
 }
