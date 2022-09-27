@@ -32,5 +32,11 @@ namespace Signals
         public UnityAction onWinStation = delegate { };
         
         public UnityAction onMiniGameReset = delegate { };
+        
+        public UnityAction onIncome = delegate { };
+        
+        public UnityAction onResetShop = delegate { };
+        
+        public UnityAction<bool> onBuy = delegate { };
     }
 }

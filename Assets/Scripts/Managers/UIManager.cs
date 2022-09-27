@@ -29,12 +29,14 @@ namespace Managers
         {
             UISignals.Instance.onPlay += OnPlay;
             UISignals.Instance.onNext += OnNext;
+            UISignals.Instance.onIncome += OnIncome;
         }
 
         private void UnsubscribeEvents()
         {
             UISignals.Instance.onNext -= OnNext;
             UISignals.Instance.onPlay -= OnPlay;
+            UISignals.Instance.onIncome += OnIncome;
         }
 
         private void OnDisable()
@@ -46,6 +48,7 @@ namespace Managers
         private void Play()
         {
             panelController.OnClosePanel(UIPanel.PlayButton);
+            panelController.OnClosePanel(UIPanel.IncomeButton);
             CoreGameSignals.Instance.onPlay?.Invoke();
             CameraSignals.Instance.onPlayEnter?.Invoke();
         }
@@ -57,10 +60,21 @@ namespace Managers
             ScoreSignals.Instance.onScoreReset?.Invoke();
             DOVirtual.DelayedCall(.1f, () => CameraSignals.Instance.onReset?.Invoke());
             DOVirtual.DelayedCall(.1f, () => StackSignals.Instance.onRestFollow?.Invoke());
-            DOVirtual.DelayedCall(1f, () => UISignals.Instance.onPlay?.Invoke());
+            DOVirtual.DelayedCall(1f, () => OnPlay());
+            DOVirtual.DelayedCall(1f, () => OnIncome());
             DOVirtual.DelayedCall(1f,()=>CoreGameSignals.Instance.onMiniGameReset?.Invoke());
+            CoreGameSignals.Instance.onResetShop?.Invoke();
         }
 
+        public void Income()
+        {
+            CoreGameSignals.Instance.onIncome?.Invoke();
+        }
+
+        private void OnIncome()
+        {
+            panelController.OnOpenPanel(UIPanel.IncomeButton);
+        }
         public void OnPlay()
         {
             panelController.OnOpenPanel(UIPanel.PlayButton);

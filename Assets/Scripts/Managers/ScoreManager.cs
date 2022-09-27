@@ -1,4 +1,5 @@
 ﻿using Signals;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
@@ -8,6 +9,8 @@ namespace Managers
         #region Self Variables
 
         #region Serialized Variables
+
+        [SerializeField] private TextMeshProUGUI scoreText;
 
         #endregion
         
@@ -20,6 +23,8 @@ namespace Managers
         private int _playerScore;
 
         private int _atmScore;
+
+        private int _mainScore;
 
         #endregion
         
@@ -39,6 +44,8 @@ namespace Managers
             ScoreSignals.Instance.onAtmScoreCalculation += OnAtmScoreCalculation;
             ScoreSignals.Instance.onSetScore += OnSetScore;
             ScoreSignals.Instance.onScoreReset += OnScoreReset;
+            ScoreSignals.Instance.onShowScore += OnShowScore;
+            ScoreSignals.Instance.onShopScoreCalculation += OnShopScoreCalculation;
         }
 
         private void UnsubscribeEvents()
@@ -48,6 +55,8 @@ namespace Managers
             ScoreSignals.Instance.onAtmScoreCalculation -= OnAtmScoreCalculation;
             ScoreSignals.Instance.onSetScore -= OnSetScore;
             ScoreSignals.Instance.onScoreReset -= OnScoreReset;
+            ScoreSignals.Instance.onShowScore -= OnShowScore;;
+            ScoreSignals.Instance.onShopScoreCalculation -= OnShopScoreCalculation;
         }
 
         private void OnDisable()
@@ -97,6 +106,27 @@ namespace Managers
         private void OnSetScore()
         {
             CoreGameSignals.Instance.onGetScore?.Invoke(_playerScore);
+        }
+
+        private void OnShowScore()
+        {
+            _mainScore += _playerScore;
+            scoreText.text = _mainScore.ToString();
+        }
+
+        private void OnShopScoreCalculation(int value)
+        {
+            if (_mainScore >= value)
+            {
+                _mainScore -= value;
+                scoreText.text = _mainScore.ToString();
+                CoreGameSignals.Instance.onBuy?.Invoke(true);
+            }
+
+            else
+                CoreGameSignals.Instance.onBuy?.Invoke(false);
+                
+            
         }
 
         private void OnScoreReset()

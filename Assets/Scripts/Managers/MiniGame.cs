@@ -83,7 +83,7 @@ namespace Managers
 
         private void WallInstantiate()
         {
-            for (int i = 0; i < 18; i++)
+            for (int i = 0; i < 100; i++)
             {
                 _scoreObject = Instantiate(wall, transform.GetChild(1));
                 _scoreObject.transform.localPosition = new Vector3(0, i * 5,0);
@@ -93,7 +93,7 @@ namespace Managers
 
         private void WallScoreIncrease()
         {
-            _scoreObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "x" +_scoreX;
+            _scoreObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "x " +_scoreX;
             _scoreX += 0.1f;
         }
 
@@ -111,14 +111,15 @@ namespace Managers
                 _fakeMoney = Instantiate(fakeMoney, transform.GetChild(0));
                 _fakeMoney.transform.localPosition = new Vector3(0, -1 * i, -10);
             }
-            
         }
         
         IEnumerator MovingPlayer()
         {
             ScoreSignals.Instance.onSetScore?.Invoke();
-            transform.GetChild(0).DOMoveY(Mathf.Clamp(_score, 0, 85), 3f).SetEase(Ease.Flash).SetDelay(1);
+            transform.GetChild(0).DOMoveY(Mathf.Clamp(_score, 0, 900), 3f).SetEase(Ease.Flash).SetDelay(1);
+            Debug.Log(_score);
             yield return new WaitForSeconds(4.5f);
+            ScoreSignals.Instance.onShowScore?.Invoke();
             UISignals.Instance.onNext?.Invoke();
         }
 
@@ -131,7 +132,7 @@ namespace Managers
 
         private void OnMiniGameReset()
         {
-            for (int i = 0; i < 18; i++)
+            for (int i = 0; i < 100; i++)
             {
                 transform.GetChild(1).GetChild(i).GetComponent<Renderer>().material = WallMetarial;
             }

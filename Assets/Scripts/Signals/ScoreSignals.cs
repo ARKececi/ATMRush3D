@@ -11,5 +11,7 @@ namespace Signals
         public UnityAction<GameObject> onAtmScoreCalculation = delegate { };
         public UnityAction onSetScore = delegate { };
         public UnityAction onScoreReset = delegate { };
+        public UnityAction onShowScore = delegate { };
+        public UnityAction<int> onShopScoreCalculation = delegate { };
     }
 }

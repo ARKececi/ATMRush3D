@@ -8,5 +8,6 @@ namespace Signals
     {
         public UnityAction onPlay = delegate { };
         public UnityAction onNext = delegate { };
+        public UnityAction onIncome = delegate { };
     }
 }

@@ -3,7 +3,8 @@
     public enum UIPanel
     {
         PlayButton,
-        NextButton
+        NextButton,
+        IncomeButton
 
     }
 }

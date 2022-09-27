@@ -46,7 +46,7 @@ namespace Controllers
                 
                 _objects[index].transform.DOScale(_scale, 0.1f);
                 _objects[index].transform.DOScale(new Vector3(1, 1, 1), 0.1f).SetDelay(0.1f);
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.02f);
             }
         }
     }
