@@ -1,4 +1,5 @@
-﻿using Controllers.UIManager;
+﻿using System;
+using Controllers.UIManager;
 using DG.Tweening;
 using Enums;
 using Signals;
@@ -49,6 +50,7 @@ namespace Managers
         {
             panelController.OnClosePanel(UIPanel.PlayButton);
             panelController.OnClosePanel(UIPanel.IncomeButton);
+            panelController.OnClosePanel(UIPanel.StackButton);
             CoreGameSignals.Instance.onPlay?.Invoke();
             CameraSignals.Instance.onPlayEnter?.Invoke();
         }
@@ -62,6 +64,7 @@ namespace Managers
             DOVirtual.DelayedCall(.1f, () => StackSignals.Instance.onRestFollow?.Invoke());
             DOVirtual.DelayedCall(1f, () => OnPlay());
             DOVirtual.DelayedCall(1f, () => OnIncome());
+            DOVirtual.DelayedCall(1f, () => OnStack());
             DOVirtual.DelayedCall(1f,()=>CoreGameSignals.Instance.onMiniGameReset?.Invoke());
             CoreGameSignals.Instance.onResetShop?.Invoke();
         }
@@ -71,9 +74,19 @@ namespace Managers
             CoreGameSignals.Instance.onIncome?.Invoke();
         }
 
+        public void Stack()
+        {
+            CoreGameSignals.Instance.onStack?.Invoke();
+        }
+
         private void OnIncome()
         {
             panelController.OnOpenPanel(UIPanel.IncomeButton);
+        }
+
+        private void OnStack()
+        {
+            panelController.OnOpenPanel(UIPanel.StackButton);
         }
         public void OnPlay()
         {

@@ -1,4 +1,7 @@
-﻿using Signals;
+﻿using System;
+using Data.UnityObject;
+using Data.ValueObject;
+using Signals;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +29,8 @@ namespace Managers
 
         private int _mainScore;
 
+        private int _stackX;
+
         #endregion
         
         #endregion
@@ -46,6 +51,7 @@ namespace Managers
             ScoreSignals.Instance.onScoreReset += OnScoreReset;
             ScoreSignals.Instance.onShowScore += OnShowScore;
             ScoreSignals.Instance.onShopScoreCalculation += OnShopScoreCalculation;
+            ScoreSignals.Instance.onScoreXValue += OnScoreXValue;
         }
 
         private void UnsubscribeEvents()
@@ -57,6 +63,7 @@ namespace Managers
             ScoreSignals.Instance.onScoreReset -= OnScoreReset;
             ScoreSignals.Instance.onShowScore -= OnShowScore;;
             ScoreSignals.Instance.onShopScoreCalculation -= OnShopScoreCalculation;
+            ScoreSignals.Instance.onScoreXValue -= OnScoreXValue;
         }
 
         private void OnDisable()
@@ -65,19 +72,34 @@ namespace Managers
         }
         #endregion
 
+        private void Awake()
+        {
+            _stackX = GetShopData().Stack;
+        }
+        
+        private ShopData GetShopData()
+        {
+            return Resources.Load<SO_ShopData>("Data/SO_ShopData").shopdata; // save tarafından çekilecek 
+        }
+
+        private void OnScoreXValue(int value)
+        {
+            _stackX = value;
+        }
+
         private void ScoreCalculation(GameObject other)
         {
                 MoneyName = other.GetComponentInChildren<MeshFilter>();
                 switch (MoneyName.mesh.name)
                 {
                     case "Money Instance" :
-                        _score = 1;
+                        _score = 1 * _stackX;
                         break;
                     case "gold Instance":
-                        _score = 2;
+                        _score = 2 * _stackX;
                         break;
                     case "diamond Instance":
-                        _score = 4;
+                        _score = 4 * _stackX;
                         break;
                 }
         }
@@ -110,7 +132,9 @@ namespace Managers
 
         private void OnShowScore()
         {
-            _mainScore += _playerScore;
+            var Calculation = _playerScore * .275f;
+            Calculation = (Calculation * 0.1f);
+            _mainScore += Mathf.RoundToInt(Calculation * _playerScore);
             scoreText.text = _mainScore.ToString();
         }
 

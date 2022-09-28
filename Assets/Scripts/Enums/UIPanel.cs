@@ -4,7 +4,8 @@
     {
         PlayButton,
         NextButton,
-        IncomeButton
+        IncomeButton,
+        StackButton
 
     }
 }

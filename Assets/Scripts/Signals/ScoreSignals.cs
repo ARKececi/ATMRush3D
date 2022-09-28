@@ -13,5 +13,6 @@ namespace Signals
         public UnityAction onScoreReset = delegate { };
         public UnityAction onShowScore = delegate { };
         public UnityAction<int> onShopScoreCalculation = delegate { };
+        public UnityAction<int> onScoreXValue = delegate { };
     }
 }

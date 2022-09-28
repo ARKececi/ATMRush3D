@@ -38,5 +38,7 @@ namespace Signals
         public UnityAction onResetShop = delegate { };
         
         public UnityAction<bool> onBuy = delegate { };
+        
+        public UnityAction onStack = delegate { };
     }
 }

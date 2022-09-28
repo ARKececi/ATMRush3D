@@ -93,7 +93,7 @@ namespace Managers
 
         private void WallScoreIncrease()
         {
-            _scoreObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "x " +_scoreX;
+            _scoreObject.transform.GetChild(0).GetComponent<TextMeshPro>().text = "X" +(_scoreX);
             _scoreX += 0.1f;
         }
 
