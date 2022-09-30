@@ -52,6 +52,7 @@ namespace Managers
             ScoreSignals.Instance.onShowScore += OnShowScore;
             ScoreSignals.Instance.onShopScoreCalculation += OnShopScoreCalculation;
             ScoreSignals.Instance.onScoreXValue += OnScoreXValue;
+            SaveSignals.Instance.onSetMainScore += OnSetMainScore;
         }
 
         private void UnsubscribeEvents()
@@ -64,6 +65,7 @@ namespace Managers
             ScoreSignals.Instance.onShowScore -= OnShowScore;;
             ScoreSignals.Instance.onShopScoreCalculation -= OnShopScoreCalculation;
             ScoreSignals.Instance.onScoreXValue -= OnScoreXValue;
+            SaveSignals.Instance.onSetMainScore -= OnSetMainScore;
         }
 
         private void OnDisable()
@@ -74,12 +76,26 @@ namespace Managers
 
         private void Awake()
         {
-            _stackX = GetShopData().Stack;
+            _stackX = GetSaveStack();
+            _mainScore = GetSaveScore();
         }
-        
-        private ShopData GetShopData()
+
+        private void Start()
         {
-            return Resources.Load<SO_ShopData>("Data/SO_ShopData").shopdata; // save tarafından çekilecek 
+            _stackX += 1;
+            scoreText.text = _mainScore.ToString();
+        }
+
+        private int GetSaveStack()
+        {
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("StackCount") ? ES3.Load<int>("StackCount") : 0;
+        }
+
+        private int GetSaveScore()
+        {
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("MainScore") ? ES3.Load<int>("MainScore") : 0;
         }
 
         private void OnScoreXValue(int value)
@@ -149,8 +165,11 @@ namespace Managers
 
             else
                 CoreGameSignals.Instance.onBuy?.Invoke(false);
-                
-            
+        }
+
+        private int OnSetMainScore()
+        {
+            return _mainScore;
         }
 
         private void OnScoreReset()

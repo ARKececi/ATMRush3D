@@ -1,4 +1,6 @@
 ﻿using System;
+using Keys;
+using Signals;
 using UnityEngine;
 
 namespace Managers

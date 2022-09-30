@@ -70,12 +70,12 @@ namespace Managers
             switch (_cameraState)
             {
                 case CameraState.Runner:
-                    _cameraState = CameraState.Init; 
+                    _cameraState = CameraState.Initialized; 
                     animator.SetTrigger(_cameraState.ToString());
                     break;
             
             
-                case CameraState.Init:
+                case CameraState.Initialized:
                     _cameraState = CameraState.Runner; 
                     animator.SetTrigger(_cameraState.ToString());
                     break;

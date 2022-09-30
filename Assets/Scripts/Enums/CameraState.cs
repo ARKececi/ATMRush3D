@@ -2,7 +2,7 @@
 {
     public enum CameraState
     {
-        Init,
+        Initialized,
         Runner,
         Fake
     }

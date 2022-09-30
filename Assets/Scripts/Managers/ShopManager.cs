@@ -17,21 +17,19 @@ namespace Managers
 
         [SerializeField] private GameObject money;
 
-        [SerializeField] private TextMeshProUGUI incomeText;
-
         [SerializeField] private TextMeshProUGUI stackText;
+
+        [SerializeField] private TextMeshProUGUI incomeText;
 
         #endregion
 
         #region Private Variables
 
-        private int _incomeCount;
+        private int _stackCount;
 
         private int _value;
 
-        private int _stackCount;
-
-        private int _stackValue;
+        private int _incomeCount;
 
         private bool _buy;
 
@@ -49,17 +47,21 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onIncome += OnIncome;
-            CoreGameSignals.Instance.onResetShop += OnResetIncome;
+            CoreGameSignals.Instance.onResetShop += OnStartStack;
             CoreGameSignals.Instance.onBuy += OnBuy;
             CoreGameSignals.Instance.onStack += OnStack;
+            CoreGameSignals.Instance.onSetStack += OnSetStack;
+            CoreGameSignals.Instance.onSetIncome += OnSetIncome;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onIncome -= OnIncome;
-            CoreGameSignals.Instance.onResetShop += OnResetIncome;
+            CoreGameSignals.Instance.onResetShop -= OnStartStack;
             CoreGameSignals.Instance.onBuy -= OnBuy;
             CoreGameSignals.Instance.onStack -= OnStack;
+            CoreGameSignals.Instance.onSetStack -= OnSetStack;
+            CoreGameSignals.Instance.onSetIncome -= OnSetIncome;
         }
 
         private void OnDisable()
@@ -70,33 +72,64 @@ namespace Managers
 
         private void Awake()
         {
-            _incomeCount = GetShopData().Income;
-            _stackCount = GetShopData().Stack;
+            _stackCount = GetSaveStack();
+            _incomeCount = GetSaveIncome();
             _value = 200;
             _buy = false;
         }
 
+        private int GetSaveIncome()
+        {
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("IncomeCount") ? ES3.Load<int>("IncomeCount") : 0;
+        }
+        
+        private int GetSaveStack()
+        {
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("StackCount") ? ES3.Load<int>("StackCount") : 0;
+        }
+
         private void Start()
         {
-            OnResetIncome();
-            stackText.text = "Stack\n" + _value * (_stackCount);
+            OnStartStack();
+            OnStartIncome();
         }
 
-        private void OnResetIncome()
+        private int OnSetStack()
         {
-            incomeText.text = "Income\n" + _value * (_incomeCount + 1);
-            if (_incomeCount >= 1)
+            return _stackCount;
+        }
+
+        private int OnSetIncome()
+        {
+            return _incomeCount;
+        }
+
+        private void OnStartIncome()
+        {
+            
+            if (_incomeCount < 4)
             {
-                for (int i = 0; i < _incomeCount; i++)
+                incomeText.text = "Income\n" + _value * (_incomeCount + 1);   
+            }
+            else incomeText.text = "Income\n" + "Max";
+        }
+
+        private void OnStartStack()
+        {
+            if (_stackCount < 3)
+            {
+                stackText.text = "Stack\n" + _value * (_stackCount + 1);   
+            }
+            else stackText.text = "Stack\n" + "Max";
+            if (_stackCount >= 1)
+            {
+                for (int i = 0; i < _stackCount; i++)
                 {
-                    DOVirtual.DelayedCall(.2f, () => IncomeInstantiate());
+                    DOVirtual.DelayedCall(.2f, () => StackInstantiate());
                 }
             }
-        }
-
-        private ShopData GetShopData()
-        {
-            return Resources.Load<SO_ShopData>("Data/SO_ShopData").shopdata; // saveden çekilecek 
         }
 
         private void OnBuy(bool buy)
@@ -104,29 +137,26 @@ namespace Managers
             _buy = buy;
         }
 
-        public void OnIncome()
+        public void OnStack()
         {
-            if (_incomeCount < 3)
+            if (_stackCount < 3)
             {
-                ScoreSignals.Instance.onShopScoreCalculation?.Invoke(_value * (_incomeCount + 1));
+                ScoreSignals.Instance.onShopScoreCalculation?.Invoke(_value * (_stackCount + 1));
                 if (_buy != false)
                 {
-                    _incomeCount += 1;
-                    GetShopData().Income = _incomeCount;
-                    DOVirtual.DelayedCall(.2f, () => IncomeInstantiate());
-                    if (_incomeCount < 3)
+                    _stackCount += 1;
+                    DOVirtual.DelayedCall(.2f, () => StackInstantiate());
+                    if (_stackCount < 3)
                     {
-                        incomeText.text = "Income\n" + _value * (_incomeCount + 1);   
+                        stackText.text = "Stack\n" + _value * (_stackCount + 1);   
                     }
-                    else incomeText.text = "Income\n" + "Max";
-                    
-                    
+                    else stackText.text = "Stack\n" + "Max";
                 }
             }
-            else incomeText.text = "Income\n" + "Max";
+            else stackText.text = "Stack\n" + "Max";
         }
 
-        private void IncomeInstantiate()
+        private void StackInstantiate()
         {
             var obje = Instantiate(money);
             StackSignals.Instance.onStackAdd(new StackObjectParams()
@@ -135,27 +165,24 @@ namespace Managers
                 });
         }
 
-        private void OnStack()
+        private void OnIncome()
         {
-            if (_stackCount < 4)
+            if (_incomeCount < 4)
             {
-                ScoreSignals.Instance.onShopScoreCalculation?.Invoke(_value * (_stackCount));
+                ScoreSignals.Instance.onShopScoreCalculation?.Invoke(_value * (_incomeCount + 1));
                 if (_buy != false)
                 {
-                    Debug.Log("burdayım");
-                    _stackCount += 1;
-                    GetShopData().Stack = _stackCount;
-                    ScoreSignals.Instance.onScoreXValue?.Invoke(_stackCount);
-                    if (_stackCount < 4)
+                    _incomeCount += 1;
+                    ScoreSignals.Instance.onScoreXValue?.Invoke(_incomeCount);
+                    if (_incomeCount < 4)
                     {
-                        stackText.text = "Stack\n" + _value * (_stackCount);   
+                        incomeText.text = "Income\n" + _value * (_incomeCount + 1);   
                     }
-                    else stackText.text = "Stack\n" + "Max";
-                    
-                    
+                    else incomeText.text = "Income\n" + "Max";
+
                 }
             }
-            else stackText.text = "Stack\n" + "Max";
+            else incomeText.text = "Income\n" + "Max";
             
         }
     }

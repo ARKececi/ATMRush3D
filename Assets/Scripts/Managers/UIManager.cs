@@ -67,6 +67,7 @@ namespace Managers
             DOVirtual.DelayedCall(1f, () => OnStack());
             DOVirtual.DelayedCall(1f,()=>CoreGameSignals.Instance.onMiniGameReset?.Invoke());
             CoreGameSignals.Instance.onResetShop?.Invoke();
+            SaveSignals.Instance.onSave?.Invoke();
         }
 
         public void Income()

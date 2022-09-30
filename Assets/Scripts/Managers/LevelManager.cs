@@ -41,11 +41,13 @@ namespace Managers
         private void SubscribeEvents()
         {
             CoreGameSignals.Instance.onWinStation += OnWinStation;
+            CoreGameSignals.Instance.onSetActiveLevel += OnSetActiveLevel;
         }
 
         private void UnsubscribeEvents()
         {
             CoreGameSignals.Instance.onWinStation -= OnWinStation;
+            CoreGameSignals.Instance.onSetActiveLevel -= OnSetActiveLevel;
         }
 
         private void OnDisable()
@@ -63,8 +65,14 @@ namespace Managers
         
         private int GetActiveLevel()
         {
-            return _levelID % Resources.Load<SO_LevelData>("Data/SO_LevelData").Levels.Count;
+            if (!ES3.FileExists()) return 0;
+            return ES3.KeyExists("LevelCount") ? ES3.Load<int>("LevelCount") : 0;
+            //return _levelID % Resources.Load<SO_LevelData>("Data/SO_LevelData").Levels.Count;
+        }
 
+        private int OnSetActiveLevel()
+        {
+            return _levelID;
         }
 
         private void Start()
