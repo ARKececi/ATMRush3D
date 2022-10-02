@@ -117,7 +117,6 @@ namespace Managers
         {
             ScoreSignals.Instance.onSetScore?.Invoke();
             transform.GetChild(0).DOMoveY(Mathf.Clamp(_score, 0, 900), 3f).SetEase(Ease.Flash).SetDelay(1);
-            Debug.Log(_score);
             yield return new WaitForSeconds(4.5f);
             ScoreSignals.Instance.onShowScore?.Invoke();
             UISignals.Instance.onNext?.Invoke();

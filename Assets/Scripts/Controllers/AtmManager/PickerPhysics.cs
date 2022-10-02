@@ -19,6 +19,7 @@ namespace Controllers
 
             if (other.CompareTag("Collected"))
             {
+                transform.GetComponent<BoxCollider>().isTrigger = false;
                 //StackSignals.Instance.onListController?.Invoke(other.transform.parent.gameObject);
                 atmController.MoneyVariableCount(other.transform.parent.gameObject);
             }

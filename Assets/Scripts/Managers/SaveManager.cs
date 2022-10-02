@@ -37,8 +37,6 @@ namespace Managers
                 StackCount = CoreGameSignals.Instance.onSetStack(),
                 MainScore = SaveSignals.Instance.onSetMainScore(),
                 LevelCount = CoreGameSignals.Instance.onSetActiveLevel()
-                
-                
             });
         }
         

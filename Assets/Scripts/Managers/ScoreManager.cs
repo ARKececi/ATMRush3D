@@ -136,9 +136,12 @@ namespace Managers
 
         private void OnAtmScoreCalculation(GameObject other)
         {
-            ScoreCalculation(other);
-            _atmScore += _score;
-            CoreGameSignals.Instance.onSetScore?.Invoke(_atmScore);
+            if (_atmScore <= _playerScore)
+            {
+                ScoreCalculation(other);
+                _atmScore += _score;
+                CoreGameSignals.Instance.onSetScore?.Invoke(_atmScore);
+            }
         }
 
         private void OnSetScore()

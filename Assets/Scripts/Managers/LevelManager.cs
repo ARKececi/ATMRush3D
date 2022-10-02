@@ -60,6 +60,7 @@ namespace Managers
         private void Awake()
         {
             _levelID = GetActiveLevel();
+            _levelCount = GetActiveLevel();
             Debug.Log(_levelID);
         }
         
@@ -86,6 +87,7 @@ namespace Managers
                 .Levels.Count;
             OnClearLevel();
             OnLoaderLevel();
+            Debug.Log(_levelID);
         }
         
         private void OnLoaderLevel()
@@ -101,6 +103,7 @@ namespace Managers
         private void OnWinStation()
         {
             _levelCount += 1;
+            Debug.Log(_levelCount);
             NextLevelID();
         }
     }

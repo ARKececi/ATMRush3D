@@ -66,7 +66,6 @@ namespace Managers
         
         private void OnPlayEnter()
         {
-            Debug.Log(_cameraState);
             switch (_cameraState)
             {
                 case CameraState.Runner:
