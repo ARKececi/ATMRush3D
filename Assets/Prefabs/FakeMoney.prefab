@@ -185,7 +185,6 @@ GameObject:
   - component: {fileID: 4305312615506494589}
   - component: {fileID: 4305312615506494588}
   - component: {fileID: 4305312615506494590}
-  - component: {fileID: 4305312615506494591}
   m_Layer: 0
   m_Name: ObjePhysics
   m_TagString: Money
@@ -215,7 +214,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4305312615506494586}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.5, z: 0.6}
@@ -235,18 +234,4 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 3
---- !u!114 &4305312615506494591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4305312615506494586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a2403e6db0747cab1b25fde1176dce7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 4305312614265119602}
-  stackManager: {fileID: 0}
+  m_CollisionDetection: 0
